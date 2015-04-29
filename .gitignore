@@ -17,3 +17,19 @@ eatio_web/timelog.log
 eatio_web/celerybeat-schedule
 eatio_web/eatio_web/db.eatio_db
 eatio_web/eatio_web/db_files/my_production.cnf
+
+*.iml
+*.ini
+temp/
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+
+# Intellij project files
+*.iws
+.idea/
