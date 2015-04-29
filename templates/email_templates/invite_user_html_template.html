@@ -1,0 +1,101 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {{ user.first_name }} wants to see you on Earthmiles!
+{% endblock %}
+
+
+{% block bodytext %}
+    <h2 class="mc-toc-title">{{ user.first_name }} wants to see you on Earthmiles!</h2>
+
+    <p><span>
+         Your friend {{ user.first_name }}  wants to connect with you on Earthmiles so you can share your healthy and earth-loving activities!  Earthmiles rewards you each time you walk, run or cycle.
+    </span>
+    </p>
+
+    <h3 class="null">Automatic awesomeness</h3>
+
+    <p><span>
+        Once you link up your fitness app with Earthmiles, you automatically start racking up earthmiles every time you record an activity. By the way, if you accept the invitation from {{ user.first_name }}, you both get {{ bonus_earthmiles }} bonus earthmiles!
+    </span>
+    </p>
+
+    <h3>It&#39;s raining goodies!</h3>
+
+    <p>Check out the Rewards Centre of the app for the amazing offers that you can grab - just by being good! Purchase your favourite offers with your hard-earned earthmiles&nbsp;and feel like a super star.</p>
+
+    <h3>Paperless is the new powerful&nbsp;</h3>
+
+    <p>Click on any reward to see all the&nbsp;details and how you can avail it. When you choose to purchase a reward with your earthmiles, you will receive&nbsp;a PDF coupon straight to your email to use when you want to (as long as its valid!)</p>
+
+    <h3>Its a Long Road</h3>
+
+    <p>Its not just walking, running and cycling. There is a lot of other cool stuff you can do to earn Earthmiles. Update with our new versions as they come out to know more.</p>
+
+    <h3>If being awesome were a crime...</h3>
+
+    <p>...then our very generous partners-in-crime make your efforts so worth it! Check out our partners on our website and check out our social media pages for the latest rewards.</p>
+
+    <h3 style="color:green">Bonus earthmiles when you sign up and more when you invite your friends </h3>
+
+    <p style="color:green">
+        {{ user.first_name }} has invited you to join Earthmiles using your email address {{ to_user_email }}.
+        Use this email address when you register so that both you and {{ user.first_name }} can earn {{ bonus_earthmiles }} bonus earthmiles and start getting rewards faster.
+
+        You could also just sign up with Facebook (as long as your account is linked to {{ to_user_email }}) for both of you to get the bonus points!
+
+        Then you can go ahead and add tons more friends to share your activities with (not to mention, get loads more earthmiles as a bonus!)
+
+        When you get a good look at our drool-worthy rewards, you will thank {{ user.first_name }} for the free gift!
+
+    </p>
+
+    <br />
+    *High five*<br />
+    The Earthmiles Crew</p>
+
+{% endblock %}
+
+{% block download_from_app_store %}
+    {#    show the download from app store button with link#}
+
+    <table class="mcnImageBlock" border="0" width="100%" cellpadding="0" cellspacing="0">
+        <tbody class="mcnImageBlockOuter">
+        <tr>
+            <td style="padding:9px" class="mcnImageBlockInner" valign="top">
+                <table class="mcnImageContentContainer" align="left" border="0" width="100%"
+                       cellpadding="0" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td class="mcnImageContent"
+                            style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;"
+                            valign="top">
+
+                            <a href={{app_link}}>
+                                <img alt=""
+                                     src="https://gallery.mailchimp.com/b8d4c12ca1348e5dd7c49b8dd/images/dc89e0e9-fbd8-4fcb-8498-750c1346fdc3.png"
+                                     style="max-width:448px; padding-bottom: 0; display: inline !important; vertical-align: bottom;"
+                                     class="mcnImage" align="middle" width="224">
+                            </a>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

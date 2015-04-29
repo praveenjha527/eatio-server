@@ -1,0 +1,8 @@
+Hello {{ new_user.first_name }} {{ new_user.last_name }},
+
+Thanks for signing up
+
+Best wishes
+
+Eatio Team
+

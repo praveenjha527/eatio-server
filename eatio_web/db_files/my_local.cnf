@@ -1,0 +1,6 @@
+[client]
+database = eatio
+host = localhost
+user = root
+password = password
+default-character-set = utf8

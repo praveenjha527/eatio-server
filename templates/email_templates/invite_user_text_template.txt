@@ -1,0 +1,6 @@
+{% load i18n %}
+{% blocktrans %}
+{{user.first_name}} has invited you to join earthmiles.
+
+Get the app here : {{app_link}}
+{% endblocktrans %}

@@ -1,0 +1,131 @@
+<style type="text/css">
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#map_canvas { height: 300px;width:500px }
+</style>
+<script type="text/javascript">
+    var path = JSON.parse($("#id_map_json").val());
+
+    function initialize() {    
+        var homeLatlng = new google.maps.LatLng(path[0].latitude,path[0].longitude);
+        var myOptions = {
+            zoom: 15,
+            center: homeLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        var end_cordinates = path.slice(-1).pop()
+
+        // add start marker
+        var homeMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(path[0].latitude,path[0].longitude),
+            map: map,
+            icon: 'http://maps.google.co.uk/intl/en_ALL/mapfiles/ms/micons/green-dot.png'
+        });
+
+        // add end marker
+        var homeMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(end_cordinates.latitude,end_cordinates.longitude),
+            map: map,
+            icon: 'http://maps.google.co.uk/intl/en_ALL/mapfiles/ms/micons/red-dot.png'
+        });
+
+        // create an array of coordinates
+        
+        var arrCoords = []
+        
+        path.forEach(function(entry) {
+            arrCoords.push(new google.maps.LatLng(entry.latitude,entry.longitude))
+        });
+
+        // draw the route on the map
+        var route = new google.maps.Polyline({
+            path: arrCoords,
+            strokeColor: "#FF0000",
+            strokeOpacity: 1.0,
+            strokeWeight: 4,
+            geodesic: false,
+            map: map
+        });
+    }
+
+    $( document ).ready(function() {
+
+        //Distance Vs Time chart
+        var distance_map = JSON.parse($("#id_distance_json").val());
+        var time = []
+        var distance = []
+        distance_map.forEach(function(entry) {
+{#            time.push(entry.time);#}
+            time.push("");
+            distance.push(entry.distance)
+        });
+        var data = {
+            labels: time,
+            datasets: [
+                {
+                    label: "Distance vs Time",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "red",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: distance
+                }
+            ]
+        };
+        var options = {
+
+            ///Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines: false,
+            skipLabels : true,
+            pointDotRadius : 2,
+            pointHitDetectionRadius : 5,
+        }
+        Chart.defaults.global.responsive = false;
+        Chart.defaults.global.animation = false;
+
+        var ctx = document.getElementById("distanceChart").getContext("2d");
+        var distanceChart = new Chart(ctx).Line(data, options);
+
+        //Speed Vs Time Chart
+
+        var speed_map = JSON.parse($("#id_speed_json").val());
+        var time = []
+        var speed = []
+        speed_map.forEach(function(entry) {
+{#            time.push(entry.time);#}
+            time.push("");
+            speed.push(entry.speed)
+        });
+        var data = {
+            labels: time,
+            datasets: [
+                {
+                    label: "Speed vs Time",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "red",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: speed
+                }
+            ]
+        };
+
+
+        var ctx = document.getElementById("speedChart").getContext("2d");
+        var speedChart = new Chart(ctx).Line(data, options);
+    });
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<div id="map_canvas"></div>
+<h2 class="title">Distance (km) vs Time</h2>
+<canvas id="distanceChart" width="800px" height="500px"></canvas>
+
+<h2 class="title">Speed (km/hr) vs Time</h2>
+<canvas id="speedChart" width="800px" height="500px"></canvas>

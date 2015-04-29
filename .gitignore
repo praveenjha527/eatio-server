@@ -1,0 +1,19 @@
+# API gitignores
+*.pyc
+eatio_web/settings/__init__.py
+eatio_web/nbproject
+keys/keys.pub
+eatio_web/media/*
+eatio_web/venv/*
+*.db
+eatio_web/.idea/*
+.DS_Store
+*.rdb
+*.log
+
+# log files
+eatio_web/timelog.log
+
+eatio_web/celerybeat-schedule
+eatio_web/eatio_web/db.eatio_db
+eatio_web/eatio_web/db_files/my_production.cnf

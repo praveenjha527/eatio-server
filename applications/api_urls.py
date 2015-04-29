@@ -1,0 +1,40 @@
+from django.conf.urls import patterns, include, url
+
+from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views
+from rest_framework import generics
+from applications.accounts import api as account_api
+from applications.review import api as review_api
+from applications.restaurant import api as restaurant_api
+from applications.globalprefs import views as global_settings
+from applications.notifications_api import api as notification_api
+from applications.accounts.api import FacebookLogin, PasswordResetRequestEmail, HelpTicketView
+
+router = DefaultRouter()
+
+# Account routers
+router.register(r'register', account_api.UserRegisterViewSet, base_name="register")
+router.register(r'me', account_api.ProfileEditViewSet, base_name="edit")
+
+# Review routers
+router.register(r'review', review_api.ReviewViewSet)
+router.register(r'agree-disagree', review_api.AgreeDisagreeViewSet)
+
+# Restaurant routers
+router.register(r'restaurant', restaurant_api.RestaurantViewSet)
+router.register(r'nearby-restaurant', restaurant_api.RestaurantNearbyViewSet, base_name="nearby")
+
+# App Preference
+router.register(r'preferences', global_settings.AppPreferencesView,base_name="configuration")
+
+# Notification routers
+router.register(r'notifications', notification_api.NotificationViewSet, base_name="notifications")
+
+urlpatterns = patterns('',
+    url(r'^login/', views.obtain_auth_token),
+    url(r'^', include(router.urls)),
+    url(r'^facebook/$', FacebookLogin.as_view(), name='fb_login'),
+    url(r'^forgotpassword/$',PasswordResetRequestEmail.as_view(),name='password-reset'),
+    url(r'^helpticket/$', HelpTicketView.as_view(), name = 'helpticket'),
+)
+
