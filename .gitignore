@@ -1,6 +1,5 @@
 # API gitignores
 *.pyc
-eatio_web/settings/__init__.py
 eatio_web/nbproject
 keys/keys.pub
 eatio_web/media/*

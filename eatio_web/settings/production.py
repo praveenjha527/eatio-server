@@ -2,11 +2,13 @@ from .base import *
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file':
-                '/home/sayonetech/webapps/eatio_production/eatio_web/eatio_web/db_files/my_production.cnf',
-            'init_command': 'SET storage_engine=INNODB',
-        },
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd6mugpamhntget',
+        'USER': 'xhmechysxthfrk',
+        'PASSWORD': 'om2tWzYoY58QxDkhDPuYdyle5M',
+        'HOST': 'ec2-54-204-42-178.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
+ALLOWED_HOSTS = ['*']
