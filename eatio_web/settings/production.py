@@ -6,7 +6,7 @@ DATABASES = {
         'NAME': 'eatio_db',
         'USER': 'sayone_eatio',
         'PASSWORD': 'B8hzA8eG',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
