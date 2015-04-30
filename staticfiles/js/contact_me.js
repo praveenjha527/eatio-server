@@ -10,7 +10,6 @@ $(function() {
             // get values from FORM
             var name = $("input#name").val();
             var email = $("input#email").val();
-            var phone = $("input#phone").val();
             var message = $("textarea#message").val();
             var firstName = name; // For Success/Failure Message
             // Check for white space in name for Success/Fail message
@@ -18,7 +17,7 @@ $(function() {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
             $.ajax({
-                 url: '{% url 'web:ContactUs' %}',
+                url: "/web/contactus/",
                 type: "POST",
                 data: {
                     name: name,
@@ -44,16 +43,16 @@ $(function() {
                     $('#success').html("<div class='alert alert-danger'>");
                     $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                         .append("</button>");
-                    $('#success > .alert-danger').append("<strong>Sorry " + firstName + ",  Please try again later!");
+                    $('#success > .alert-danger').append("<strong>Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!");
                     $('#success > .alert-danger').append('</div>');
                     //clear all fields
                     $('#contactForm').trigger("reset");
-                }
+                },
             })
         },
         filter: function() {
             return $(this).is(":visible");
-        }
+        },
     });
 
     $("a[data-toggle=\"tab\"]").click(function(e) {
@@ -67,3 +66,58 @@ $(function() {
 $('#name').focus(function() {
     $('#success').html('');
 });
+
+
+//function contact() {
+//
+//    var name = $("input#name").val();
+//    var email = $("input#email").val();
+//    var message = $("textarea#message").val();
+//    var data = {
+//        name: name,
+//        email: email,
+//        message: message
+//    };
+//    $.ajax({
+//        url: '{% url 'web:Contact' %}',
+//         type : "POST",
+//        data: data
+//
+//
+//    });
+//}
+
+//$('#post-form').on('submit', function(event){
+//    event.preventDefault();
+//    console.log("form submitted!")
+//    message_post();
+//});
+//
+//
+//function message_post() {
+//    console.log("create post is working!") // sanity check
+//    $.ajax({
+//        url : "create_post/", // the endpoint
+//        type : "POST", // http method
+//        data : { name : $('#name').val(),email : $('#email').val(), message  : $('#message').val() }, // data sent with the post request
+//
+//        // handle a successful response
+//        success : function(json) {
+//            $('#name').val()(''); // remove the value from the input
+//             $('#email').val()('');
+//             $('#message').val()('');
+//
+//            console.log(json); // log the returned json to the console
+//            console.log("success"); // another sanity check
+//        },
+//
+//        // handle a non-successful response
+//        error : function(xhr,errmsg,err) {
+//            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+//                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+//            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+//        }
+//    });
+//};
+//
+

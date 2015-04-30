@@ -7,6 +7,6 @@ urlpatterns = patterns('',
         PasswordResetView.as_view(),
         name = 'password_reset'
     ),
-        url(r'contactus/$', ContactUs.as_view(),
+        url(r'contactus/$', ContactUs.as_view(),name= 'contactus'
     ),
         )
