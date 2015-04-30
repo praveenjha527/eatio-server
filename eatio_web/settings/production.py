@@ -6,7 +6,7 @@ DATABASES = {
         'NAME': 'eatio_db',
         'USER': 'sayone_eatio',
         'PASSWORD': 'B8hzA8eG',
-        'HOST': 'localhost',
+        'HOST': ' eatio.cofer1yssdmz.ap-southeast-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
