@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+
     # 3rd party apps
     'rest_framework',
     'rest_framework.authtoken',
@@ -61,6 +62,7 @@ INSTALLED_APPS = (
     'applications.restaurant',
     'applications.review',
     'applications.globalprefs',
+    'applications.web',
 )
 
 MIDDLEWARE_CLASSES = (
