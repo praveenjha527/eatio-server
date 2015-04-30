@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'applications.restaurant',
     'applications.review',
     'applications.globalprefs',
+    'applications.acra',
 )
 
 MIDDLEWARE_CLASSES = (
