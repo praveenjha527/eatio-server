@@ -9,12 +9,14 @@ import json as json
 
 class ContactUs(View):
 
-    def message(request):
+    def post(self,request):
 
         if request.method == 'POST':
             name = request.POST.get('name')
+            return HttpResponse(name)
             email = request.POST.get('email')
             message = request.POST.get('message')
+
             response_data = {}
 
             post = Contact(name=name, email=email, message=message)
