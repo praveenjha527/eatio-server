@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'notifications',
     'mailer',
     'rest_framework_swagger',
+    'push_notifications',
 
     # preferences for the app as a whole
     'solo',
