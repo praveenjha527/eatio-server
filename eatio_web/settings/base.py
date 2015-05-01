@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'applications.review',
     'applications.globalprefs',
     'applications.web',
+    'applications.acra',
 )
 
 MIDDLEWARE_CLASSES = (
