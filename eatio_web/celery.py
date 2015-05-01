@@ -10,7 +10,7 @@ from django.conf import settings
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eatio_web.settings')
 
-RABBIT_MQ = "amqp://eatio@localhost:5672//"
+RABBIT_MQ = "amqp://eatio:pwdeatio@localhost:5672/eatio_host/"
 
 #REDIS_URL = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 
