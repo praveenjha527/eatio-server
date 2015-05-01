@@ -1,4 +1,3 @@
-__author__ = 'sayone'
 from django.db import models
 
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django.contrib.auth.models import User
-from applications.acra.models import *
+from acra.models import CrashReport
+
 
 def statusUpdate(self, request, queryset):
 	rows_updated = queryset.update(solved='solved')
