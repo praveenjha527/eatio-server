@@ -3,6 +3,8 @@ from django.conf.urls import patterns, include, url
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework import generics
+
+from applications.notifications_api import api as notification_views
 from applications.accounts import api as account_api
 from applications.review import api as review_api
 from applications.restaurant import api as restaurant_api
@@ -36,5 +38,6 @@ urlpatterns = patterns('',
     url(r'^facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^forgotpassword/$',PasswordResetRequestEmail.as_view(),name='password-reset'),
     url(r'^helpticket/$', HelpTicketView.as_view(), name = 'helpticket'),
+    url(r'register_android_device/$',notification_views.RegisterAndroidDeviceTokenViewSet.as_view(),name='register-android-device'),
 )
 
