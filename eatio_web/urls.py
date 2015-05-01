@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^web/', include('applications.web.urls')),
     url(r'^acra/', include("acra.urls")),
+    url(r'^robots\.txt$', include('robots.urls')),
 )
 
 urlpatterns += patterns('',

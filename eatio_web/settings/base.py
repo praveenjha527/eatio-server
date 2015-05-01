@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'mailer',
     'rest_framework_swagger',
     'push_notifications',
+    'robots',
 
     # preferences for the app as a whole
     'solo',
