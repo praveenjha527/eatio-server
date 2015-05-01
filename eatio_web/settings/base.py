@@ -26,7 +26,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
 
     # 3rd party apps
     'rest_framework',
@@ -61,6 +62,7 @@ INSTALLED_APPS = (
     'applications.restaurant',
     'applications.review',
     'applications.globalprefs',
+    'applications.web',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,12 +1,33 @@
 from django.shortcuts import render, render_to_response
 from django.views.generic import View
-from django.http import Http404
+from django.http import Http404,HttpResponse
 
 from applications.accounts.models import PasswordReset
 from applications.web.form import PasswordForm
+from applications.web.models import Contact
+import json as json
+from django.views.decorators.csrf import csrf_exempt
+
+class ContactUs(View):
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        return super(ContactUs, self).dispatch(request, *args, **kwargs)
+
+    def post(self,request):
+         if request.method == 'POST':
+             name = request.POST.get('name')
+             email = request.POST.get('email')
+             message = request.POST.get('message')
 
 
+             response_data = {}
 
+             post = Contact(name=name, email=email, message=message)
+             post.save()
+             return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
 
 class PasswordResetView(View):
     template_name = "password_reset/password_reset.html"
@@ -41,6 +62,8 @@ class HomePageView(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, )
+
+
 
 
 

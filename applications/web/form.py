@@ -1,4 +1,5 @@
 from django import forms
+from models import Contact
 
 
 class PasswordForm(forms.Form):
@@ -22,4 +23,3 @@ class PasswordForm(forms.Form):
         if password1 != password2:
             raise forms.ValidationError("Your passwords do not match")
         return password2
-
