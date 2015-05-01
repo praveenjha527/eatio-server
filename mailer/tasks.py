@@ -12,7 +12,7 @@ class SendEmailTask(PeriodicTask):
     # this will run every 60 seconds
     # send all emails in the mailer queue
     """
-    run_every = timedelta(seconds=3000)
+    run_every = timedelta(seconds=30)
 
     def run(self, **kwargs):
         send_all()
