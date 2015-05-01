@@ -55,7 +55,7 @@ h5,
 h6 {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-weight: 100;
 }
 
 .img-centered {
@@ -128,7 +128,7 @@ fieldset[disabled] .btn-primary.active {
     font-size: 18px;
     font-weight: 700;
     color: #fff;
-    background-color: #fcb749;
+    background-color: #edcf29;
 }
 
 .btn-xl:hover,
@@ -173,13 +173,12 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default {
     border-color: transparent;
-    background-color: #222;
+    background-color: #e01c2c;
 }
 
 .navbar-default .navbar-brand {
     font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
-    color: red;
-    background: url('../img/logo.png');
+    color: red;    
     width: 124px;
     height: 50px;
 
@@ -197,8 +196,7 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .navbar-default .navbar-toggle {
-    border-color: #fed136;
-    background-color: #fed136;
+    
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -207,7 +205,7 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-    background-color: #fed136;
+   
 }
 
 .navbar-default .nav li a {
@@ -227,7 +225,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-default .navbar-nav>.active>a {
     border-radius: 0;
     color: #fff;
-    background-color: #fcb749;
+    background-color: #edcf29;
 }
 
 .navbar-default .navbar-nav>.active>a:hover,
@@ -289,8 +287,9 @@ header .intro-text .intro-lead-in {
     margin-bottom: 25px;
     font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 26px;
-    font-style: italic;footer span.copyright
+    font-style: normal;
     line-height: 26px;
+    text-shadow: 1px 1px 3px #333;
 }
 
 header .intro-text .intro-heading {
@@ -312,7 +311,8 @@ header .intro-text .intro-heading {
         margin-bottom: 25px;
         font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
         font-size: 65px;
-        font-style: italic;
+        font-style: normal;
+        text-shadow: 1px 1px 3px #333;
         line-height: 65px;
     }
 
@@ -335,14 +335,29 @@ section h2.section-heading {
     margin-bottom: 15px;
     font-size: 40px;
 }
+section h3.section-subheading {   
+      margin-bottom: 10px;
+  text-transform: none;
+  font-family: "Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  
+  font-weight: 400;
+  padding: 0 1em;
+  line-height: 25px;
+}
 
-section h3.section-subheading {
-    margin-bottom: 50px;
-    text-transform: none;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 400;
+@media(min-width:768px){
+    section h3.section-subheading {   
+      
+  
+  
+  
+  
+  
+  padding: 0 12em;
+  
+  text-align: justify;
+}
 }
 
 @media(min-width:768px) {
@@ -947,13 +962,17 @@ body {
 .service-box {
       border-bottom: 1px solid #ccc;
   margin-top: 40px;
+    float: left;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .text-mid {
-      margin: 8em 0px;
+      margin: 1em 0px;
 }
 .red {color : #e01c2c;}
+
 .down{
-    margin-top: 80px;
+      margin: 3em 0;  
+
 }
 
 .header-page {
@@ -973,3 +992,20 @@ body {
       padding: 10px 0;
   background-color: #e01c2c;
 }
+.screen {
+    float: right;
+}
+section#stat {
+    background-color: #fff;
+    background-image: white;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    
+}
+
+section#stat .section-heading {
+    color: #333;
+    text-transform: none;
+}
+
