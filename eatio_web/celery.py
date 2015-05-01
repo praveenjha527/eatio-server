@@ -14,7 +14,7 @@ RABBIT_MQ = "amqp://eatio:pwdeatio@localhost:5672/eatio_host/"
 
 #REDIS_URL = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 
-app = Celery('eatio', broker=RABBIT_MQ,)
+app = Celery('eatio', backend='amqp',broker=RABBIT_MQ)
 
 
 
