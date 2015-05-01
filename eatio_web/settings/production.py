@@ -12,3 +12,8 @@ DATABASES = {
 }
 
 ALLOWED_HOSTS = ['*']
+
+
+INSTALLED_APPS+= (
+    'djcelery',
+)

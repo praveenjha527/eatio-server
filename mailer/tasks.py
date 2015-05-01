@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from datetime import timedelta
 
 from celery.task import PeriodicTask
-from mailer.engine import send_all 
+from mailer.engine import send_all
 import logging
 
 
