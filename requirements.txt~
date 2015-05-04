@@ -18,4 +18,3 @@ django-celery==3.1.10
 kombu==3.0.21
 amqp==1.4.5
 django-robots==1.0
-Logentries==0.7
