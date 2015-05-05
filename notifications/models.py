@@ -297,10 +297,9 @@ def post_notification_save_tasks(sender, instance, created=False, **kwargs):
     """
     Does housekeeping tasks after notification is created like sending push notification
     """
-    #from .tasks import send_push_notification
+    from .tasks import send_push_notification
     if created:
-         pass
-        #send_push_notification.delay(instance)
+         send_push_notification.delay(instance)
 
 
 post_save.connect(post_notification_save_tasks, sender=Notification, dispatch_uid="post_notification_save_tasks")
