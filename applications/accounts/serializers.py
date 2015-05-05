@@ -24,11 +24,14 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = account_models.User
-        fields = ('id', 'username', 'name', 'image', 'gender', 'code', 'activity_level', 'total_points', 'redeemable_points')
-        read_only_fields = ('id', )
+        fields = ('id', 'username', 'name', 'image', 'gender', 'code', 'activity_level', 'total_points', 'redeemable_points', 'country', 'age', 'location_city')
+        read_only_fields = ('id', 'total_points', 'redeemable_points' )
 
     def get_code(self, obj):
-        return account_models.SignupCode.objects.get(user=obj).code
+        try:
+            return account_models.SignupCode.objects.get(user=obj).code
+        except Exception:
+            return "admin"
 
     def get_image(self, obj):
         """
