@@ -17,7 +17,7 @@ from stdimage import StdImageField
 from applications.utils.utils import clean_to_email_field
 
 from common.base_models import TimeStampedModelBase
-
+from .fields import CountryField
 
 class User(AbstractUser, TimeStampedModelBase):
     """
@@ -47,6 +47,9 @@ class User(AbstractUser, TimeStampedModelBase):
     name = models.CharField(_("Name"), max_length=255,)
     gender = models.CharField(max_length=8, choices=GENDER_CHOICES, null=True, blank=True)
     first_page = models.CharField(max_length=20, choices = DEFAULT_HOME_CHOICES, default ='TIMELINE')
+    location_city = models.CharField(max_length=50, null=True, blank=True, default="")
+    country = CountryField(max_length=50, null=True, blank=True)
+    age = models.DateField(blank=True, null=True)
     image = StdImageField(
         upload_to="userprofile",
         help_text='The image should be atleast 100x100 and a square.',
