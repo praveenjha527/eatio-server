@@ -7,18 +7,22 @@ from applications.web.form import PasswordForm
 from applications.web.models import Contact
 import json as json
 from django.views.decorators.csrf import csrf_exempt
+# Get logger
+import logging
+log = logging.getLogger("logentries")
+
 
 class ContactUs(View):
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         return super(ContactUs, self).dispatch(request, *args, **kwargs)
 
+
     def post(self,request):
          if request.method == 'POST':
              name = request.POST.get('name')
              email = request.POST.get('email')
              message = request.POST.get('message')
-
 
              response_data = {}
 
