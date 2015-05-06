@@ -10,7 +10,7 @@ from django.conf import settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eatio_web.settings')
 
 
-app = Celery('eatio_web', backend='amqp')
+app = Celery('eatio_web')
 
 
 app.config_from_object('django.conf:settings')
@@ -19,7 +19,6 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 app.conf.update(
    CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend',
-   BROKER_POOL_LIMIT = 1,
 )
 
 
