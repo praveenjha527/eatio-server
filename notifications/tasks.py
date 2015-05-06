@@ -11,5 +11,6 @@ def send_push_notification(notification):
     Sends push notification in background and returns True if it could be sent, else false
 
     """
+    print "sending notification"
     return notification.send_push_notification()
 
