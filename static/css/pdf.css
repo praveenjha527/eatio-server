@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+  font-family: 'HelveticaNeueLTCom-MdCn';
+  src: url('../fonts/HelveticaNeueLTCom-MdCn.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/HelveticaNeueLTCom-MdCn.woff') format('woff'),
+  url('../fonts/HelveticaNeueLTCom-MdCn.ttf')  format('truetype'),
+  url('../fonts/HelveticaNeueLTCom-MdCn.svg#HelveticaNeueLTCom-MdCn') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.wrapper{ max-width:640px; margin:0 auto;}
+.reward_banner{ position:relative;}
+.reward_banner h1{font-family: 'HelveticaNeueLTCom-MdCn'; font-size:30px; color:#FFF; font-weight:normal; margin:0;}
+.reward_banner h5{font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#FFF; font-weight:normal; margin:0;}
+.reward_banner h6{font-family: 'HelveticaNeueLTCom-MdCn'; font-size:22px; color:#18c514; font-weight:normal; margin:0;}
+.banner_bottom{ background:url(../img/banner_bottom.jpg) no-repeat; height:22px;}
+.top_image{ position:absolute; z-index:10; top:30px; left:30px;}
+.overlap_table{ position:absolute; z-index:10; top:20px; left:30px;}
+
+.banner_table{ margin:0;}
+.descrip_tble{ margin-top:40px;}
+.text_type1{font-family: 'HelveticaNeueLTCom-MdCn'; font-size:36px; color:#000; font-weight:normal; margin:0;}
+.text_type2{font-family: 'HelveticaNeueLTCom-MdCn'; font-size:36px; color:#18c514; font-weight:normal; margin:0;}
+.descrip_tble p{ color:#888888; font-size:22px; font-family:Arial, Helvetica, sans-serif; margin:0 0 15px 0;}
+.descrip_tble h5{font-family: 'HelveticaNeueLTCom-MdCn'; font-size:22px; color:#000; font-weight:normal; margin:0;}
+.visit_button{ background:#18c514; border-radius:5px;font-family: 'HelveticaNeueLTCom-MdCn'; font-size:22px; color:#fff; display:block; padding:15px 0; font-weight:normal; text-align:center; text-decoration:none; margin-bottom:10px;}

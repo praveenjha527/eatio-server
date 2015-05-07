@@ -1,0 +1,100 @@
+.block.gray {
+    color: #fcfcf2
+}
+
+.block h2 {
+    margin: 0;
+    height: 70px;
+    color: #fcfcf2;
+    font-size: 46px;
+}
+
+.block h3 {
+    color: #414d57;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-bottom: solid 2px #414d57;
+    padding: 20px 0;
+    display: inline-block
+}
+
+.block .phone .frame {
+    height: 569px;
+    position: relative;
+    z-index: 1
+}
+
+.block .phone .screens ul {
+    list-style: none;
+    padding-left: 0
+}
+
+.block .phone .screens ul li {
+    float: left;
+    text-align: center;
+}
+
+.block .phone .screen {
+    height: 407px;
+    width: auto;
+
+}
+
+.block h2 {
+    margin-top: 90px;
+    font-size: 54px
+}
+
+.block.list .content h3 {
+    vertical-align: -30px;
+    margin-bottom: 10px
+}
+
+.block.list h5 {
+    font-size: 14px;
+    text-transform: uppercase
+}
+
+.block.list .howitworks ul {
+    padding: 20px 0 0;
+    list-style: none
+}
+
+.block.list .howitworks li {
+    position: relative;
+    opacity: 0;
+    line-height: 22px;
+    cursor: default;
+    margin-bottom: 10px;
+    padding: 5px 80px 15px 0;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-image: url('../img/howitworks_item.png');
+    background-size: 48px;
+}
+
+.block.list .howitworks li small {
+    display: block;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.block.list .howitworks li:hover, .block.list .howitworks li.hover {
+    background-image: url('../img/howitworks_item_hover.png')
+}
+
+.block.list .howitworks li:hover small, .block.list .howitworks li.hover small {
+    color: #414d57
+}
+
+.block.list .howitworks li:hover h5, .block.list .howitworks li.hover h5 {
+    color: #414d57
+}
+
+.howitworks-in {
+    float: right;
+}
+
+.screens {
+    margin-top: 16%;
+}

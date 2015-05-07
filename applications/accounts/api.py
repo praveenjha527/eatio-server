@@ -12,13 +12,15 @@ from rest_framework.response import Response
 
 from applications.accounts import models as account_models
 from applications.accounts.models import PasswordReset, HelpTicket, SignupCode
-from applications.accounts.serializers import ResetPasswordSerializer, HelpTicketSerializer
+from applications.accounts.serializers import ResetPasswordSerializer, HelpTicketSerializer, ChangePasswordSerializer
 from applications.utils.utils import get_admin, create_referral_code
 from common import mixins
 from common.mixins import UserRequired
 from applications.accounts import serializers
 from notifications.models import create_bonus_point_received_notification
-
+from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import permissions,authentication
 
 class UserRegisterViewSet(viewsets.ModelViewSet):
     """
@@ -117,3 +119,31 @@ class HelpTicketView(mixins.UserRequired,generics.CreateAPIView):
 
         obj.user = self.request.user
         send_mail('Help ticket raised', '', settings.DEFAULT_FROM_EMAIL, ['admin@eatio.co'])
+
+
+class ChangePasswordView(viewsets.ModelViewSet):
+
+    http_method_names = ('get', 'put')
+    serializer_class = ChangePasswordSerializer
+    queryset = account_models.User.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [authentication.TokenAuthentication]
+
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        return super(ChangePasswordView, self).dispatch(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+
+            user = self.request.user
+            print user,"========================================"
+            serialized = ChangePasswordSerializer(data=request.DATA)
+            if serialized.is_valid():
+                print serialized.data['password'],"=============================="
+                user.set_password(serialized.data['password'])
+                user.save()
+                return Response(status=status.HTTP_205_RESET_CONTENT)
+            else:
+                return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
+
+

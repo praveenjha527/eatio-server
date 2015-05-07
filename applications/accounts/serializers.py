@@ -15,6 +15,8 @@ from .models import HelpTicket
 
 
 
+
+
 class UserSerializer(serializers.ModelSerializer):
     """
     Serializer for auth.User
@@ -84,6 +86,14 @@ class ResetPasswordSerializer(serializers.Serializer):
             return data
         raise serializers.ValidationError("Email address not verified for any user account")
 
+class ChangePasswordSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = account_models.User
+        fields = ('id', "username", 'password')
+        read_only_fields = ('username', )
+
+
 
 class HelpTicketSerializer(serializers.ModelSerializer):
 
@@ -93,3 +103,4 @@ class HelpTicketSerializer(serializers.ModelSerializer):
         model = HelpTicket
 
         fields = ('comment',)
+

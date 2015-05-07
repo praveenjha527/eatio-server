@@ -4,6 +4,8 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from applications.web.views import HomePageView
+from rest_framework import routers
+# from applications.accounts.api import ChangePasswordView
 
 urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
