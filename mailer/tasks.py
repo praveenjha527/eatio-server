@@ -3,7 +3,6 @@ from datetime import timedelta
 
 from celery.task import PeriodicTask
 from mailer.engine import send_all
-import logging
 
 
 class SendEmailTask(PeriodicTask):
@@ -16,5 +15,5 @@ class SendEmailTask(PeriodicTask):
 
     def run(self, **kwargs):
         send_all()
-        logging.info("sending email running fine, without errors.")
+        print "sending email"
         return True
