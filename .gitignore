@@ -33,3 +33,4 @@ local.properties
 *.iws
 .idea/
 media/*
+static/*
