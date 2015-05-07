@@ -240,11 +240,12 @@ LOGGING = {
 # Email setup for password recovery
 EMAIL_BACKEND = "mailer.backend.DbBackend"
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_POST = 587
-EMAIL_HOST_USER = 't4swtesting@gmail.com'
-DEFAULT_FROM_EMAIL = 'Eatio <admin@eatio.co>'
-EMAIL_HOST_PASSWORD = 'developer@sayone'
+# hello eatio email configurations
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_POST = 465
+EMAIL_HOST_USER = 'hello_eatio'
+DEFAULT_FROM_EMAIL = 'Eatio <hello@eatio.co>'
+EMAIL_HOST_PASSWORD = 'bS656Gqp'
 EMAIL_USE_TLS = True
 
 SERVER_EMAIL = EMAIL_HOST_USER
