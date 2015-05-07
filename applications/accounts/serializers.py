@@ -58,11 +58,9 @@ class UserRegisterSerializer(UserSerializer):
         read_only_fields = ('id', )
         write_only_fields = ('password', )
 
-
     def get_token(self, obj):
         token, created = Token.objects.get_or_create(user=obj)
         return token.key
-
 
     def create(self, validated_data):
         """
@@ -76,7 +74,9 @@ class UserRegisterSerializer(UserSerializer):
         user = super(UserSerializer, self).create(validated_data)
         return user
 
+
 class ResetPasswordSerializer(serializers.Serializer):
+
     email = serializers.EmailField(required=True)
 
     def validate_email(self, data):
@@ -86,21 +86,43 @@ class ResetPasswordSerializer(serializers.Serializer):
             return data
         raise serializers.ValidationError("Email address not verified for any user account")
 
-class ChangePasswordSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = account_models.User
-        fields = ('id', "username", 'password')
-        read_only_fields = ('username', )
 
 
 
 class HelpTicketSerializer(serializers.ModelSerializer):
 
-
-
     class Meta:
         model = HelpTicket
-
         fields = ('comment',)
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """
+    Change password serializer
+    """
+    current_password = serializers.CharField(
+        help_text=_('Current Password'),
+    )
+    password = serializers.CharField(
+        help_text=_('New Password'),
+    )
+
+    def validate_current_password(self, value):
+        """
+        current password check
+        """
+        print self
+        if self.instance.has_usable_password() and not self.instance.check_password(value):
+            raise serializers.ValidationError(_('Current password is not correct'))
+
+        return value
+
+    def update(self, instance, validated_data):
+        """ change password """
+        if instance is not None:
+            instance.set_password(validated_data.get('password'))
+            instance.save()
+            return instance
+
+        return instance
 

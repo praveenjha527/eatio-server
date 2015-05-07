@@ -2,7 +2,6 @@ from django.conf.urls import patterns, include, url
 
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
-from rest_framework import generics
 
 from applications.notifications_api import api as notification_views
 from applications.accounts import api as account_api
@@ -10,8 +9,7 @@ from applications.review import api as review_api
 from applications.restaurant import api as restaurant_api
 from applications.globalprefs import views as global_settings
 from applications.notifications_api import api as notification_api
-from applications.accounts.api import FacebookLogin, PasswordResetRequestEmail, HelpTicketView,ChangePasswordView
-from django.views.decorators.csrf import csrf_exempt
+from applications.accounts.api import FacebookLogin, PasswordResetRequestEmail, HelpTicketView , AccountPassword
 
 
 router = DefaultRouter()
@@ -35,10 +33,11 @@ router.register(r'preferences', global_settings.AppPreferencesView,base_name="co
 router.register(r'notifications', notification_api.NotificationViewSet, base_name="notifications")
 
 #Change Password
-router.register(r'changepassword', account_api.ChangePasswordView, base_name='changepassword')
+#router.register(r'changepassword', account_api.ChangePasswordView, base_name='changepassword')
 
 urlpatterns = patterns('',
     url(r'^login/', views.obtain_auth_token),
+    url(r'^change-password/$',AccountPassword.as_view(), name='api_account_password_change'),
     url(r'^', include(router.urls)),
     url(r'^facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^forgotpassword/$',PasswordResetRequestEmail.as_view(),name='password-reset'),

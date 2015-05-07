@@ -121,29 +121,25 @@ class HelpTicketView(mixins.UserRequired,generics.CreateAPIView):
         send_mail('Help ticket raised', '', settings.DEFAULT_FROM_EMAIL, ['admin@eatio.co'])
 
 
-class ChangePasswordView(viewsets.ModelViewSet):
+class AccountPassword(mixins.UserRequired,generics.GenericAPIView):
+    """
+    Change password of the current user.
 
-    http_method_names = ('get', 'put')
+    **Accepted parameters:**
+
+     * current_password
+     * password
+    """
+
     serializer_class = ChangePasswordSerializer
-    queryset = account_models.User.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = [authentication.TokenAuthentication]
 
-    @csrf_exempt
-    def dispatch(self, request, *args, **kwargs):
-        return super(ChangePasswordView, self).dispatch(request, *args, **kwargs)
+    def post(self, request, format=None):
+        """ validate password change operation and return result """
+        serializer_class = self.get_serializer_class()
+        serializer = serializer_class(data=request.DATA, instance=request.user)
 
-    def update(self, request, *args, **kwargs):
+        if serializer.is_valid():
+            serializer.save()
+            return Response({ 'detail': 'Password successfully changed' })
 
-            user = self.request.user
-            print user,"========================================"
-            serialized = ChangePasswordSerializer(data=request.DATA)
-            if serialized.is_valid():
-                print serialized.data['password'],"=============================="
-                user.set_password(serialized.data['password'])
-                user.save()
-                return Response(status=status.HTTP_205_RESET_CONTENT)
-            else:
-                return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+        return Response(serializer.errors, status=400)
