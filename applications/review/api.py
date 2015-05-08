@@ -7,6 +7,9 @@ from rest_framework import viewsets
 from applications.review import serializers
 from applications.review import models as review_models
 from common import mixins
+from rest_framework import filters
+
+from django.views.decorators.csrf import csrf_exempt
 
 
 class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
@@ -26,6 +29,20 @@ class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
     def get_queryset(self):
         return review_models.Review.get_valid_reviews()
 
+class ReviewSearchViewset(viewsets.ModelViewSet):
+
+    http_method_names = ['put', 'get']
+    serializer_class = serializers.ReviewSearchSerializer
+    filter_backends = (filters.SearchFilter,)
+
+    @csrf_exempt
+    def get_queryset(self):
+        """
+        Review Search Function
+        """
+        search = self.request.GET.get('key')
+        queryset = review_models.Review.objects.filter(review__icontains=search)
+        return queryset
 
 class AgreeDisagreeViewSet(mixins.UserRequired, viewsets.ModelViewSet):
     """

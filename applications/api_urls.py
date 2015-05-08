@@ -35,6 +35,8 @@ router.register(r'notifications', notification_api.NotificationViewSet, base_nam
 #Change Password
 #router.register(r'changepassword', account_api.ChangePasswordView, base_name='changepassword')
 
+router.register(r'search', review_api.ReviewSearchViewset, base_name='reviewsearch')
+
 urlpatterns = patterns('',
     url(r'^login/', views.obtain_auth_token),
     url(r'^change-password/$',AccountPassword.as_view(), name='api_account_password_change'),
@@ -43,6 +45,5 @@ urlpatterns = patterns('',
     url(r'^forgotpassword/$',PasswordResetRequestEmail.as_view(),name='password-reset'),
     url(r'^helpticket/$', HelpTicketView.as_view(), name = 'helpticket'),
     url(r'register_android_device/$',notification_views.RegisterAndroidDeviceTokenViewSet.as_view(),name='register-android-device'),
-
 )
 

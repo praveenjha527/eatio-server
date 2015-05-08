@@ -79,6 +79,13 @@ class ReviewSerializer(ReviewBaseSerializer):
         return restaurant_serializer.RestaurantSerializer(instance=obj.restaurant, context=self.context).data
 
 
+class ReviewSearchSerializer(serializers.ModelSerializer):
+    """
+    searializer for Search review
+    """
+    class Meta:
+        model=review_models.Review
+
 
 class AgreeDisagreeSerializer(serializers.ModelSerializer):
     """
@@ -88,5 +95,6 @@ class AgreeDisagreeSerializer(serializers.ModelSerializer):
         model = review_models.AgreeDisagree
         fields = ('id', 'user','review', 'agree')
         read_only_fields = ('id', )
+
 
 
