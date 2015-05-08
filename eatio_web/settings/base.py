@@ -144,6 +144,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
 
         'rest_framework.authentication.SessionAuthentication',
@@ -202,17 +203,30 @@ TIMELOG_LOG = 'timelog.log'
 
 LOGGING = {
   'version': 1,
-  # 'formatters': {
-  #   'plain': {
-  #     'format': '%(asctime)s %(message)s'},
-  #   },
+  'formatters': {
+    'plain': {
+      'format': '%(asctime)s %(message)s'},
+    },
   'handlers': {
+      'timelog': {
+      'level': 'DEBUG',
+      'class': 'logging.handlers.RotatingFileHandler',
+      'filename': TIMELOG_LOG,
+      'maxBytes': 1024 * 1024 * 5,  # 5 MB
+      'backupCount': 5,
+      'formatter': 'plain',
+    },
   'logentries_handler': {
     'token': '4aea7b45-f4b7-4bad-bc96-3ac6c12d9f3c',
     'class': 'logentries.LogentriesHandler'
   },
   },
   'loggers': {
+      'timelog.middleware': {
+      'handlers': ['timelog'],
+      'level': 'DEBUG',
+      'propogate': False,
+     },
   'logentries': {
     'handlers': ['logentries_handler'],
     'level': 'INFO',
