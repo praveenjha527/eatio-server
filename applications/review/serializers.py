@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.timesince import timesince
 
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 
 from applications.review import models as review_models
 from applications.restaurant import models as restaurant_models
@@ -78,15 +79,19 @@ class ReviewSerializer(ReviewBaseSerializer):
     def get_restaurant(self, obj):
         return restaurant_serializer.RestaurantSerializer(instance=obj.restaurant, context=self.context).data
 
-
-
 class AgreeDisagreeSerializer(serializers.ModelSerializer):
     """
     serializer for agree review
     """
     class Meta:
         model = review_models.AgreeDisagree
-        fields = ('id', 'user','review', 'agree')
+        fields = ('id', 'user', 'review', 'agree')
         read_only_fields = ('id', )
 
 
+class ReviewSearchSerializer(serializers.ModelSerializer):
+    """
+    searializer for Search review
+    """
+    class Meta:
+        model = review_models.Review
