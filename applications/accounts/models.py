@@ -103,13 +103,13 @@ def send_signup_email(new_user):
 
     # print "email sent to %s" % to
 
-    send_mail('New user %s signed up' % new_user, 'Now!', settings.DEFAULT_FROM_EMAIL, ['admin@eatio.co'])
+    send_mail('New user %s signed up' % new_user, 'Now!', settings.DEFAULT_FROM_EMAIL, ['hello@eatio.co'])
 
 def send_user_delete_email(sender, instance, created=False, **kwargs):
     """ email to tell user that his account got deleted """
 
     subject = "Your account was deleted."
-    message = 'If this was not expected, contact administrator'
+    message = 'If this was not expected, contact hello@eatio.co'
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [instance.email])
 
 pre_delete.connect(send_user_delete_email, sender=User)
