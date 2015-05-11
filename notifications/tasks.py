@@ -1,8 +1,8 @@
 from __future__ import absolute_import
 
+from celery import shared_task, task
 
-from celery import shared_task
-
+from mailer.engine import send_all
 
 
 @shared_task
@@ -14,3 +14,8 @@ def send_push_notification(notification):
     print "sending notification"
     return notification.send_push_notification()
 
+
+@task
+def send_mails_all():
+    send_all()
+    return True
