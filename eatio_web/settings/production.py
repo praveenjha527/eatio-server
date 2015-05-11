@@ -17,3 +17,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS+= (
     'djcelery',
 )
+
+import djcelery
+djcelery.setup_loader()

@@ -194,8 +194,6 @@ class Notification(models.Model):
         """
 
         print "sending"
-
-
         device = GCMDevice.objects.get(user=self.recipient)
         print "android -----------"
         print device
