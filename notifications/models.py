@@ -194,21 +194,14 @@ class Notification(models.Model):
         """
 
         print "sending"
-        ios_device_list = APNSDevice.objects.filter(user=self.recipient)
-        if ios_device_list:
-            for device in ios_device_list:
-                device.send_message(self.verb, badge=self.badge)
-            self.mark_as_pushed()
 
-        android_device_list = GCMDevice.objects.filter(user=self.recipient)
+
+        device = GCMDevice.objects.get(user=self.recipient)
         print "android -----------"
+        print device
         print self.recipient
-        print android_device_list
-        if android_device_list:
-            for device in android_device_list:
-                device.send_message(self.verb)
-            self.mark_as_pushed()
-
+        device.send_message(self.verb)
+        self.mark_as_pushed()
         return True
 
 EXTRA_DATA = False
