@@ -9,6 +9,7 @@ from rest_framework import serializers
 from applications.review import models as review_models
 from applications.restaurant import models as restaurant_models
 
+from geopy.distance import vincenty
 
 class RestaurantSerializer(serializers.ModelSerializer):
     """
@@ -23,10 +24,11 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
 class RestaurantDetailSerializer(RestaurantSerializer):
     reviews = serializers.SerializerMethodField()
+    away = serializers.SerializerMethodField()
 
     class Meta:
         model = restaurant_models.Restaurant
-        fields = RestaurantSerializer.Meta.fields+('reviews', )
+        fields = RestaurantSerializer.Meta.fields+('reviews', 'away' )
         read_only_fields = ('id', )
 
     def get_reviews(self, obj):
@@ -34,6 +36,14 @@ class RestaurantDetailSerializer(RestaurantSerializer):
         return [review_serializers.ReviewBaseSerializer(
             instance=review, context=self.context,
             ).data for review in review_models.Review.get_valid_reviews(obj)]
+
+    def get_away(self, obj):
+        request = self.context.get('request')
+        lat = request.GET.get('lat')
+        lng = request.GET.get('lng')
+        current_location = (lat, lng)
+        restaurant_location = (obj.lat,obj.lng)
+        return vincenty(current_location, restaurant_location).meters
 
 
 
