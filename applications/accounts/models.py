@@ -184,6 +184,3 @@ class SignupCode(models.Model):
         verbose_name = 'Signup Code'
         verbose_name_plural = 'Signup Code'
 
-# class ChangePassword(models.Model):
-#
-#     user = models.ForeignKey(User)
