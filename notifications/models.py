@@ -201,6 +201,7 @@ class Notification(models.Model):
             self.mark_as_pushed()
 
         android_device_list = GCMDevice.objects.filter(user=self.recipient)
+        print "android -----------"
         print self.recipient
         print android_device_list
         if android_device_list:
