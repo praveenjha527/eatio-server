@@ -12,6 +12,5 @@ def send_push_notification(notification):
 
     """
     print "sending notification"
-    print notification
     return notification.send_push_notification()
 
