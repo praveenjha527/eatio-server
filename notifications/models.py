@@ -192,6 +192,7 @@ class Notification(models.Model):
         else returns False
         """
 
+        print "sending"
         ios_device_list = APNSDevice.objects.filter(user=self.recipient)
         if ios_device_list:
             for device in ios_device_list:
@@ -199,6 +200,7 @@ class Notification(models.Model):
             self.mark_as_pushed()
 
         android_device_list = GCMDevice.objects.filter(user=self.recipient)
+        print android_device_list
         if android_device_list:
             for device in android_device_list:
                 device.send_message(self.verb)

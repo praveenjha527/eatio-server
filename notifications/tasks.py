@@ -12,7 +12,8 @@ def send_push_notification(notification):
 
     """
     print "sending notification"
-    return notification.send_push_notification()
+    print notification.send_push_notification()
+    return True
 
 
 @task
