@@ -17,5 +17,6 @@ def send_push_notification(notification):
 
 @task
 def send_mails_all():
+    print "sending emails"
     send_all()
     return True
