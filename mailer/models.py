@@ -1,6 +1,8 @@
 import base64
 import logging
 import pickle
+from django.db.models.signals import post_save
+from applications.utils.decorators import disable_for_loaddata
 
 try:
     from django.utils.timezone import now as datetime_now
@@ -267,3 +269,16 @@ class MessageLog(models.Model):
             return email.subject
         else:
             return ""
+
+
+@disable_for_loaddata
+def post_message_save_tasks(sender, instance, created=False, **kwargs):
+    """
+    Does housekeeping tasks after email is created 
+    """
+    from notifications.tasks import send_mails_all
+    if created:
+         send_mails_all.delay()
+
+
+post_save.connect(post_message_save_tasks, sender=Message, dispatch_uid="post_message_save_tasks")
