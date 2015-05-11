@@ -128,6 +128,7 @@ class Notification(models.Model):
     timestamp = models.DateTimeField(default=now)
 
     public = models.BooleanField(default=True)
+    is_push_notification_send = models.BooleanField(default=False)
 
     badge = models.PositiveIntegerField(null=True, blank=True,
                                         help_text='New application icon badge number. Set to None if the badge number must not be changed. At the time of notification creation, this is set only, and set equal to the number of unseen notifications at that time + 1')
