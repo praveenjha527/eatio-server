@@ -199,58 +199,6 @@ FOURSQUARE_RADIUS = 1000
 ############        TIMELOG         ####################
 
 
-TIMELOG_LOG = 'timelog.log'
-
-LOGGING = {
-  'version': 1,
-  'formatters': {
-    'plain': {
-      'format': '%(asctime)s %(message)s'},
-    },
-  'handlers': {
-      'timelog': {
-      'level': 'DEBUG',
-      'class': 'logging.handlers.RotatingFileHandler',
-      'filename': TIMELOG_LOG,
-      'maxBytes': 1024 * 1024 * 5,  # 5 MB
-      'backupCount': 5,
-      'formatter': 'plain',
-    },
-  'logentries_handler': {
-    'token': '4aea7b45-f4b7-4bad-bc96-3ac6c12d9f3c',
-    'class': 'logentries.LogentriesHandler'
-  },
-  },
-  'loggers': {
-      'timelog.middleware': {
-      'handlers': ['timelog'],
-      'level': 'DEBUG',
-      'propogate': False,
-     },
-  'logentries': {
-    'handlers': ['logentries_handler'],
-    'level': 'INFO',
-  },
-  }
-  # 'handlers': {
-  #   'timelog': {
-  #     'level': 'DEBUG',
-  #     'class': 'logging.handlers.RotatingFileHandler',
-  #     'filename': TIMELOG_LOG,
-  #     'maxBytes': 1024 * 1024 * 5,  # 5 MB
-  #     'backupCount': 5,
-  #     'formatter': 'plain',
-  #   },
-  # },
-  # 'loggers': {
-  #   'timelog.middleware': {
-  #     'handlers': ['timelog'],
-  #     'level': 'DEBUG',
-  #     'propogate': False,
-  #    }
-  # }
-}
-
 # Email setup for password recovery
 EMAIL_BACKEND = "mailer.backend.DbBackend"
 
