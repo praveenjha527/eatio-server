@@ -18,9 +18,6 @@ from common import mixins
 from common.mixins import UserRequired
 from applications.accounts import serializers
 from notifications.models import create_bonus_point_received_notification
-from rest_framework import status
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework import permissions,authentication
 
 class UserRegisterViewSet(viewsets.ModelViewSet):
     """

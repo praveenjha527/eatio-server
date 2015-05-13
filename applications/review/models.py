@@ -41,6 +41,11 @@ class Review(base_models.TimeStampedModelBase):
             reviews = reviews.filter(restaurant=restaurant)
         return reviews
 
+    @classmethod
+    def get_user_reviews(cls, user):
+        reviews = cls.objects.filter(user=user)
+        return reviews
+
 
 class AgreeDisagree(base_models.TimeStampedModelBase):
     """

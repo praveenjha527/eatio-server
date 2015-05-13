@@ -11,22 +11,20 @@ from rest_framework.authtoken.models import Token
 
 
 from applications.accounts import models as account_models
+from applications.review import models as review_models
 from .models import HelpTicket
-
-
-
 
 
 class UserSerializer(serializers.ModelSerializer):
     """
     Serializer for auth.User
     """
+    reviews = serializers.SerializerMethodField()
     code = serializers.SerializerMethodField()
-
 
     class Meta:
         model = account_models.User
-        fields = ('id', 'username', 'name', 'image', 'gender', 'code', 'activity_level', 'total_points', 'redeemable_points', 'country', 'age', 'location_city')
+        fields = ('id', 'username', 'name', 'image', 'gender', 'code', 'activity_level', 'total_points', 'redeemable_points', 'country', 'age', 'location_city','reviews')
         read_only_fields = ('id', 'total_points', 'redeemable_points' )
 
     def get_code(self, obj):
@@ -34,6 +32,12 @@ class UserSerializer(serializers.ModelSerializer):
             return account_models.SignupCode.objects.get(user=obj).code
         except Exception:
             return "admin"
+
+    def get_reviews(self, obj):
+        from applications.review import serializers as review_serializers
+        return [review_serializers.BaseReviewBaseSerializer(
+            instance=review, context=self.context,
+            ).data for review in review_models.Review.get_user_reviews(obj)]
 
     def get_image(self, obj):
         """

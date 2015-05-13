@@ -14,7 +14,7 @@ from applications.accounts import serializers as accounts_serializer
 from applications.restaurant import serializers as restaurant_serializer
 
 
-class ReviewBaseSerializer(serializers.ModelSerializer):
+class BaseReviewBaseSerializer(serializers.ModelSerializer):
     """
     Serializer for review.Review
     """
@@ -23,13 +23,12 @@ class ReviewBaseSerializer(serializers.ModelSerializer):
     disagree_count = serializers.SerializerMethodField()
     voted = serializers.SerializerMethodField()
     time_since = serializers.SerializerMethodField()
-    user = serializers.SerializerMethodField()
 
     class Meta:
         model = review_models.Review
         fields = (
             'id', 'review', 'good', 'external_id', 'agree_count',
-            'disagree_count', 'voted', 'time_since', 'user', 'image')
+            'disagree_count', 'voted', 'time_since', 'image')
         read_only_fields = ('id', )
 
     def create(self, validated_data):
@@ -56,12 +55,23 @@ class ReviewBaseSerializer(serializers.ModelSerializer):
     def get_time_since(self, obj):
         return timesince(obj.created)
 
-    def get_user(self, obj):
-        return accounts_serializer.UserSerializer(instance=obj.user, context=self.context).data
+
 
     def get_image(self, obj):
         if obj.image:
             return self.context['request'].build_absolute_uri(obj.image.large.url)
+
+
+class ReviewBaseSerializer(BaseReviewBaseSerializer):
+    user = serializers.SerializerMethodField()
+
+    class Meta:
+        model = review_models.Review
+        fields = BaseReviewBaseSerializer.Meta.fields+ ('user', )
+        read_only_fields = ('id', )
+
+    def get_user(self, obj):
+        return accounts_serializer.UserSerializer(instance=obj.user, context=self.context).data
 
 
 class ReviewSerializer(ReviewBaseSerializer):
@@ -69,6 +79,7 @@ class ReviewSerializer(ReviewBaseSerializer):
     Serializer for review.Review with restaurant
     """
     restaurant = serializers.SerializerMethodField()
+
     class Meta:
         model = review_models.Review
         fields = (
