@@ -4,7 +4,6 @@ API view for review
 """
 from rest_framework import viewsets
 from rest_framework import generics
-from rest_framework import filters
 
 from applications.review import serializers
 from applications.review import models as review_models
@@ -69,17 +68,5 @@ class AgreeDisagreeViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         return generics.get_object_or_404(self.queryset, review_id=self.kwargs.get('pk'), user=self.request.user)
 
 
-class ReviewSearchViewset(viewsets.ModelViewSet):
 
-    http_method_names = ['get']
-    serializer_class = serializers.ReviewSearchSerializer
-    filter_backends = (filters.SearchFilter,)
-
-    def get_queryset(self):
-        """
-        Review Search Function
-        """
-        search = self.request.GET.get('key')
-        queryset = review_models.Review.objects.filter(review__icontains=search)
-        return queryset
 

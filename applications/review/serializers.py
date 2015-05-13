@@ -40,6 +40,7 @@ class BaseReviewBaseSerializer(serializers.ModelSerializer):
         del validated_data["external_id"]
         validated_data["restaurant"] = restaurant
         review = super(ReviewBaseSerializer, self).create(validated_data)
+        #TODO add lat and lon on review for search nearby
         return review
 
     def get_agree_count(self, obj):
