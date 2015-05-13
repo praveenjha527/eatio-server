@@ -16,9 +16,9 @@
 sudo killall -s INT /home/ubuntu/eatio_env/bin/uwsgi
 
 ###Celery 
-supervisorctl restart celeryd (restart)
-celery worker --app=eatio_web -l info (running celery)
-ps aux | grep celery (to see the celery process)
+1. supervisorctl restart celeryd (restart)
+2. celery worker --app=eatio_web -l info (running celery)
+3. ps aux | grep celery (to see the celery process)
 
 http://thomassileo.com/blog/2012/08/20/how-to-keep-celery-running-with-supervisor/
 
