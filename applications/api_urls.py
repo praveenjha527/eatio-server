@@ -35,7 +35,6 @@ router.register(r'notifications', notification_api.NotificationViewSet, base_nam
 #search
 router.register(r'search', review_api.ReviewSearchViewset, base_name='reviewsearch')
 
-router.register(r'search', review_api.ReviewSearchViewset, base_name='reviewsearch')
 
 urlpatterns = patterns('',
     url(r'^login/', views.obtain_auth_token),

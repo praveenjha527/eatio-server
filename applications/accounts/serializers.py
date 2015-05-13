@@ -48,7 +48,7 @@ class UserSerializerWithReview(UserSerializer):
         model = account_models.User
         fields = UserSerializer.Meta.fields+ ('reviews', )
         read_only_fields = UserSerializer.Meta.read_only_fields
-        
+
 
     def get_reviews(self, obj):
         from applications.review import serializers as review_serializers
