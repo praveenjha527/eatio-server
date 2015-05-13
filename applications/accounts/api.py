@@ -49,7 +49,7 @@ class ProfileEditViewSet(UserRequired, viewsets.ModelViewSet):
     View set to update profile of current user.
     """
     http_method_names = ['put', 'get']
-    serializer_class = serializers.UserSerializer
+    serializer_class = serializers.UserSerializerWithReview
     queryset = account_models.User.objects.all()
 
     def update(self, request, *args, **kwargs):
