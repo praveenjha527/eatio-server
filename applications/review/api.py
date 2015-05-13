@@ -31,6 +31,7 @@ class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
     def get_queryset(self):
         return review_models.Review.get_valid_reviews()
 
+
 class ReviewSearchViewset(viewsets.ModelViewSet):
 
     http_method_names = ['put', 'get']
@@ -45,6 +46,7 @@ class ReviewSearchViewset(viewsets.ModelViewSet):
         search = self.request.GET.get('key')
         queryset = review_models.Review.objects.filter(review__icontains=search)
         return queryset
+
 
 class AgreeDisagreeViewSet(mixins.UserRequired, viewsets.ModelViewSet):
     """
@@ -65,6 +67,7 @@ class AgreeDisagreeViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         Get agreeDisagree object based on review and user
         """
         return generics.get_object_or_404(self.queryset, review_id=self.kwargs.get('pk'), user=self.request.user)
+
 
 class ReviewSearchViewset(viewsets.ModelViewSet):
 
