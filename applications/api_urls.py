@@ -20,7 +20,7 @@ router.register(r'me', account_api.ProfileEditViewSet, base_name="edit")
 
 # Review routers
 router.register(r'review', review_api.ReviewViewSet)
-router.register(r'agree-disagree', review_api.AgreeDisagreeViewSet)
+router.register(r'accept-reject', review_api.AgreeDisagreeViewSet, base_name='accept_reject')
 
 # Restaurant routers
 router.register(r'restaurant', restaurant_api.RestaurantViewSet)
@@ -32,8 +32,8 @@ router.register(r'preferences', global_settings.AppPreferencesView,base_name="co
 # Notification routers
 router.register(r'notifications', notification_api.NotificationViewSet, base_name="notifications")
 
-#Change Password
-#router.register(r'changepassword', account_api.ChangePasswordView, base_name='changepassword')
+#search
+router.register(r'search', review_api.ReviewSearchViewset, base_name='reviewsearch')
 
 router.register(r'search', review_api.ReviewSearchViewset, base_name='reviewsearch')
 

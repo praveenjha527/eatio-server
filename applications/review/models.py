@@ -9,6 +9,7 @@ from stdimage import StdImageField
 from notifications import notify
 
 from common import base_models
+from notifications.models import Notification
 
 
 class Review(base_models.TimeStampedModelBase):
@@ -59,6 +60,7 @@ class AgreeDisagree(base_models.TimeStampedModelBase):
     def get_agree_disagree_text(self):
         return _("agree") if self.agree else _("disagree")
 
+
     def save(self, *args, **kwargs):
         """
         Create like instance and increased like counts by 1.
@@ -74,9 +76,15 @@ class AgreeDisagree(base_models.TimeStampedModelBase):
         """
         Send notification to recipient while someone like the selfie.
         """
+
+        if self.get_agree_disagree_text() == 'agree':
+            text_type = Notification.NOTIFICATION_TYPE_AGREE
+        else:
+            text_type = Notification.NOTIFICATION_TYPE_DIS_AGREE
+
         notify.send(sender, recipient=recipient, verb="%s %s your review @ %s" %(
             sender.name, self.get_agree_disagree_text(), self.review.restaurant),
-                    action_object=self, target=self.review)
+                    action_object=self, target=self.review, type=text_type)
 
 
 
