@@ -267,8 +267,21 @@ def create_bonus_point_received_notification(sender, recipient):
     recipient.total_points = recipient.total_points + settings.SIGNUP_BONUS
     recipient.redeemable_points = recipient.redeemable_points + settings.SIGNUP_BONUS
     recipient.save()
-    notify.send(sender, recipient=recipient, verb=text,
-                    action_object=recipient, type=Notification.NOTIFICATION_TYPE_RECEIVED_POINTS)
+    newnotify = Notification(
+        recipient = recipient,
+        actor_content_type=ContentType.objects.get_for_model(sender),
+        actor_object_id=sender.pk,
+        verb=unicode(text),
+        type=Notification.NOTIFICATION_TYPE_RECEIVED_POINTS,
+        public=True,
+        description=None,
+        timestamp=now(),
+        is_push_notification_send = True,
+        unread =False
+
+
+    )
+    newnotify.save()
 
 def create_bonus_point_notification_for_referrer(sender, recipient, referred_user):
     from eatio_web.settings import base as settings
@@ -294,8 +307,8 @@ def post_notification_save_tasks(sender, instance, created=False, **kwargs):
     Does housekeeping tasks after notification is created like sending push notification
     """
     from .tasks import send_push_notification
-    if created:
-         send_push_notification.delay(instance)
+    if created and not instance.is_push_notification_send:
+        send_push_notification.delay(instance)
 
 
 post_save.connect(post_notification_save_tasks, sender=Notification, dispatch_uid="post_notification_save_tasks")
