@@ -27,7 +27,6 @@ class NotificationViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         return user.notifications.all()
 
 
-
 class RegisterAndroidDeviceTokenViewSet(APIView , mixins.UserRequired):
     """
     @inputparams:
