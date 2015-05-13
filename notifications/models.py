@@ -295,7 +295,7 @@ def post_notification_save_tasks(sender, instance, created=False, **kwargs):
     """
     from .tasks import send_push_notification
     if created:
-         send_push_notification.delay(instance)
-
+         # send_push_notification.delay(instance)
+        pass
 
 post_save.connect(post_notification_save_tasks, sender=Notification, dispatch_uid="post_notification_save_tasks")

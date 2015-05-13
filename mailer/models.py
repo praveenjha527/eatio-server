@@ -281,4 +281,4 @@ def post_message_save_tasks(sender, instance, created=False, **kwargs):
          send_mails_all.delay()
 
 
-post_save.connect(post_message_save_tasks, sender=Message, dispatch_uid="post_message_save_tasks")
+# post_save.connect(post_message_save_tasks, sender=Message, dispatch_uid="post_message_save_tasks")

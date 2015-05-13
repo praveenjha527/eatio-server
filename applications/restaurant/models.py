@@ -16,6 +16,7 @@ class Restaurant(base_models.TimeStampedModelBase):
     lat = models.CharField(_("Latitude"), max_length=30,null=True, blank=True)
     lng = models.CharField(_("Longitude"), max_length=30,null=True, blank=True)
     distance = models.CharField(_("Distance"), max_length=30,null=True, blank=True)
+    weight = models.IntegerField()
 
     def __unicode__(self):
         return "%s" % (self.name)
