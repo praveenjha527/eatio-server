@@ -198,12 +198,15 @@ class Notification(models.Model):
         """
 
         print "sending"
-        device = GCMDevice.objects.get(user=self.recipient)
-        print "android -----------"
-        print device
+        android_device_list = GCMDevice.objects.filter(user=self.recipient)
         print self.recipient
-        device.send_message(self.verb)
-        self.mark_as_pushed()
+        if android_device_list:
+            for device in android_device_list:
+                if device.registration_id:
+                    device.send_message(self.description)
+                    print "success"
+                self.mark_as_pushed()
+
         return True
 
 EXTRA_DATA = False
