@@ -34,12 +34,11 @@ class BaseReviewBaseSerializer(serializers.ModelSerializer):
         """
         Create restaurant and save to review
         """
-        print validated_data
         restaurant = restaurant_models.Restaurant.get_or_create_restaurant(
             external_id = validated_data["external_id"], )
         del validated_data["external_id"]
         validated_data["restaurant"] = restaurant
-        review = super(ReviewBaseSerializer, self).create(validated_data)
+        review = super(BaseReviewBaseSerializer, self).create(validated_data)
         review.latitude = restaurant.lat
         review.longitude = restaurant.lng
         return review
@@ -86,7 +85,6 @@ class ReviewSerializer(ReviewBaseSerializer):
             'id', 'review', 'good', 'external_id', 'agree_count',
             'disagree_count', 'voted', 'time_since', 'restaurant', "user", "image")
         read_only_fields = ('id', )
-
 
     def get_restaurant(self, obj):
         return restaurant_serializer.RestaurantSerializer(instance=obj.restaurant, context=self.context).data

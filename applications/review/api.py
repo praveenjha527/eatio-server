@@ -25,7 +25,6 @@ class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         """
         create instance.
         """
-        print "inside"
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
