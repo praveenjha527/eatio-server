@@ -51,8 +51,7 @@ class RestaurantSerializer(serializers.ModelSerializer):
     def get_latestImg(self, obj):
         try:
             review = review_models.Review.objects.filter(restaurant=obj).exclude(image='').latest('created')
-            imgurl = review.image.url
-            return os.path.abspath(imgurl)
+            return review.image.url
         except Exception:
             return "non"
 
