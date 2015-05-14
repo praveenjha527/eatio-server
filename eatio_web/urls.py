@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^web/', include('applications.web.urls')),
     url(r'^acra/', include("acra.urls")),
     url(r'^robots\.txt$', include('robots.urls')),
+    url(r'^ckeditor/', include('ckeditor.urls'))
 )
 
 urlpatterns += patterns('',
