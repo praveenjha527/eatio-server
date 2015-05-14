@@ -177,7 +177,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "allauth.socialaccount.context_processors.socialaccount",
 )
 
-REVIEWS_HOURS_COUNT = 80
+REVIEWS_HOURS_COUNT = 80 # expiry hours
+REVIEWS_FETCH_DISTANCE = 3 # minimum distance to get the list of reviews from the centre circular point
 
 ##########      OTHER SETTINGS TO BE PUT IN GLOBALPREFS LATER           ##########
 

@@ -28,7 +28,9 @@ class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        return review_models.Review.get_valid_reviews()
+        latitude = self.request.GET.get('lat', None)
+        longitude = self.request.GET.get('lng', None)
+        return review_models.Review.get_valid_reviews(None, latitude, longitude)
 
 
 class ReviewSearchViewset(viewsets.ModelViewSet):
