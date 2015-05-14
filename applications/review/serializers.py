@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.timesince import timesince
 
 from rest_framework import serializers
-from rest_framework.validators import UniqueTogetherValidator
 
 from applications.review import models as review_models
 from applications.restaurant import models as restaurant_models
@@ -35,12 +34,14 @@ class BaseReviewBaseSerializer(serializers.ModelSerializer):
         """
         Create restaurant and save to review
         """
+        print validated_data
         restaurant = restaurant_models.Restaurant.get_or_create_restaurant(
             external_id = validated_data["external_id"], )
         del validated_data["external_id"]
         validated_data["restaurant"] = restaurant
         review = super(ReviewBaseSerializer, self).create(validated_data)
-        #TODO add lat and lon on review for search nearby
+        review.latitude = restaurant.lat
+        review.longitude = restaurant.lng
         return review
 
     def get_agree_count(self, obj):
@@ -55,8 +56,6 @@ class BaseReviewBaseSerializer(serializers.ModelSerializer):
 
     def get_time_since(self, obj):
         return timesince(obj.created)
-
-
 
     def get_image(self, obj):
         if obj.image:
@@ -87,6 +86,7 @@ class ReviewSerializer(ReviewBaseSerializer):
             'id', 'review', 'good', 'external_id', 'agree_count',
             'disagree_count', 'voted', 'time_since', 'restaurant', "user", "image")
         read_only_fields = ('id', )
+
 
     def get_restaurant(self, obj):
         return restaurant_serializer.RestaurantSerializer(instance=obj.restaurant, context=self.context).data

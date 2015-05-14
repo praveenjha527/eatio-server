@@ -65,7 +65,7 @@ class Review(base_models.TimeStampedModelBase):
         return "%s-%s" % (self.restaurant, self.user)
 
     @classmethod
-    def get_valid_reviews(cls, restaurant=None, latitude=None, longitude=None):
+    def get_valid_reviews(cls, restaurant=None, latitude=None, longitude=None, user=None):
         hours_before_time = timezone.now() - timedelta(hours=settings.REVIEWS_HOURS_COUNT)
         if latitude and longitude:
             #sample lat and lon (?lat=10.0214997527&lng=76.3446975135)
@@ -74,6 +74,9 @@ class Review(base_models.TimeStampedModelBase):
             reviews = cls.objects.filter(created__gte=hours_before_time)
         if restaurant:
             reviews = reviews.filter(restaurant=restaurant)
+
+        if user:
+            reviews = reviews.exclude(user=user)
         return reviews
 
     @classmethod
