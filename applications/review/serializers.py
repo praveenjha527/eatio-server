@@ -39,8 +39,9 @@ class BaseReviewBaseSerializer(serializers.ModelSerializer):
         del validated_data["external_id"]
         validated_data["restaurant"] = restaurant
         review = super(BaseReviewBaseSerializer, self).create(validated_data)
-        review.latitude = restaurant.lat
-        review.longitude = restaurant.lng
+        review.latitude = float(restaurant.lat)
+        review.longitude = float(restaurant.lng)
+        review.save()
         return review
 
     def get_agree_count(self, obj):
