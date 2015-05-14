@@ -18,7 +18,7 @@ class RestaurantViewSet(mixins.UserRequired, viewsets.ModelViewSet):
     lookup_field = "external_id"
     http_method_names = ["get"]
     serializer_class = serializers.RestaurantSerializer
-    queryset = restaurant_models.Restaurant.objects.all()
+    queryset = restaurant_models.Restaurant.objects.all().order_by('-weight')
 
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
