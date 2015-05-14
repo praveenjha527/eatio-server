@@ -177,8 +177,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "allauth.socialaccount.context_processors.socialaccount",
 )
 
-REVIEWS_HOURS_COUNT = 80 # expiry hours
-REVIEWS_FETCH_DISTANCE = 3 # minimum distance to get the list of reviews from the centre circular point
+REVIEWS_HOURS_COUNT = 80  # expiry hours
+REVIEWS_FETCH_DISTANCE = 3  # minimum distance to get the list of reviews from the centre circular point
+RESTAURANT_DEFAULT_IMAGE = ""  # Default Images
 
 ##########      OTHER SETTINGS TO BE PUT IN GLOBALPREFS LATER           ##########
 
@@ -223,4 +224,4 @@ PUSH_NOTIFICATIONS_SETTINGS = {
     "GCM_API_KEY": "AIzaSyDoGTXmirHWbBP1nmUD6f0Yv1uADT2VatE",
 }
 
-#Default Images
+
