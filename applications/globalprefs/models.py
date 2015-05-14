@@ -26,6 +26,7 @@ class AppPreferences(SingletonModel):
     graceful_error_message = models.CharField(max_length=200, default= 'Oh snap, something went wrong')
     terms_and_conditions = RichTextField(default='Terms and Conditions')
     privacy_policy = RichTextField(default='Privacy Policy')
+    FAQ = RichTextField(default='Frequently Asked Questions')
 
 
 
