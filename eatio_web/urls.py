@@ -4,8 +4,8 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from applications.web.views import HomePageView
-from rest_framework import routers
-# from applications.accounts.api import ChangePasswordView
+from applications.globalprefs import views as global_settings
+
 
 urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
@@ -15,7 +15,11 @@ urlpatterns = patterns('',
     url(r'^web/', include('applications.web.urls')),
     url(r'^acra/', include("acra.urls")),
     url(r'^robots\.txt$', include('robots.urls')),
-    url(r'^ckeditor/', include('ckeditor.urls'))
+    url(r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^terms_conditions/', global_settings.TermsConditionsView.as_view(), name='terms_conditions'),
+    url(r'^privacy_policy/', global_settings.PrivacyPolicyView.as_view(), name='privacy_policy'),
+    url(r'^faq/', global_settings.FAQView.as_view(), name='faq'),
+
 )
 
 urlpatterns += patterns('',

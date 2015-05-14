@@ -41,8 +41,9 @@ urlpatterns = patterns('',
     url(r'^change-password/$',AccountPassword.as_view(), name='api_account_password_change'),
     url(r'^', include(router.urls)),
     url(r'^facebook/$', FacebookLogin.as_view(), name='fb_login'),
-    url(r'^forgotpassword/$',PasswordResetRequestEmail.as_view(),name='password-reset'),
+    url(r'^forgotpassword/$',PasswordResetRequestEmail.as_view(), name='password-reset'),
     url(r'^helpticket/$', HelpTicketView.as_view(), name = 'helpticket'),
-    url(r'register_android_device/$',notification_views.RegisterAndroidDeviceTokenViewSet.as_view(),name='register-android-device'),
+    url(r'register_android_device/$',notification_views.RegisterAndroidDeviceTokenViewSet.as_view(), name='register-android-device'),
+
 )
 

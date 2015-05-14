@@ -9,5 +9,3 @@ class AppPreferencesSerializer(serializers.ModelSerializer):
 
         depth = 2
 
-
-
