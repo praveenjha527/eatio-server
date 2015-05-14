@@ -84,6 +84,11 @@ class Review(base_models.TimeStampedModelBase):
         reviews = cls.objects.filter(user=user)
         return reviews
 
+    @classmethod
+    def get_search_results(cls, latitude=None, longitude=None, user=None):
+        reviews = cls.objects.filter(user=user)
+        return reviews
+
 
 class AgreeDisagree(base_models.TimeStampedModelBase):
     """

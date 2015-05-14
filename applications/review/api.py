@@ -33,7 +33,7 @@ class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         return review_models.Review.get_valid_reviews(None, latitude, longitude, self.request.user)
 
 
-class ReviewSearchViewset(viewsets.ModelViewSet):
+class ReviewSearchViewSet(mixins.UserRequired, viewsets.ModelViewSet):
 
     http_method_names = ['put', 'get']
     serializer_class = serializers.ReviewSearchSerializer
@@ -45,6 +45,8 @@ class ReviewSearchViewset(viewsets.ModelViewSet):
         Review Search Function
         """
         search = self.request.GET.get('key')
+        latitude = self.request.GET.get('lat', None)
+        longitude = self.request.GET.get('lng', None)
         queryset = review_models.Review.objects.filter(review__icontains=search)
         return queryset
 

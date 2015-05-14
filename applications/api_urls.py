@@ -33,7 +33,7 @@ router.register(r'preferences', global_settings.AppPreferencesView,base_name="co
 router.register(r'notifications', notification_api.NotificationViewSet, base_name="notifications")
 
 #search
-router.register(r'search', review_api.ReviewSearchViewset, base_name='reviewsearch')
+router.register(r'search', review_api.ReviewSearchViewSet, base_name='reviewsearch')
 
 
 urlpatterns = patterns('',
