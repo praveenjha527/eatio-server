@@ -85,8 +85,15 @@ class Review(base_models.TimeStampedModelBase):
         return reviews
 
     @classmethod
-    def get_search_results(cls, latitude=None, longitude=None, user=None):
-        reviews = cls.objects.filter(user=user)
+    def get_search_results(cls,key, latitude=None, longitude=None, user=None):
+        if latitude and longitude:
+            reviews = cls.objects.nearby(float(latitude), float(longitude), settings.REVIEWS_FETCH_DISTANCE)
+
+        if user:
+            reviews = reviews.exclude(user=user)
+
+        if key:
+            reviews = reviews.filter(review__icontains=key)
         return reviews
 
 

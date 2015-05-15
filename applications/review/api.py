@@ -43,12 +43,13 @@ class ReviewSearchViewSet(mixins.UserRequired, viewsets.ModelViewSet):
     def get_queryset(self):
         """
         Review Search Function
+
+        #sample key , lat and lon (?key=4&lat=10.0214997527&lng=76.3446975135)
         """
         search = self.request.GET.get('key')
         latitude = self.request.GET.get('lat', None)
         longitude = self.request.GET.get('lng', None)
-        queryset = review_models.Review.objects.filter(review__icontains=search)
-        return queryset
+        return review_models.Review.get_search_results(search, latitude, longitude, self.request.user)
 
 
 class AgreeDisagreeViewSet(mixins.UserRequired, viewsets.ModelViewSet):
