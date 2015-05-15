@@ -2,8 +2,10 @@
 """
 API view for review
 """
+from requests import Response
 from rest_framework import viewsets
 from rest_framework import generics
+from rest_framework import status
 
 from applications.review import serializers
 from applications.review import models as review_models
@@ -35,21 +37,25 @@ class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
 
 class ReviewSearchViewSet(mixins.UserRequired, viewsets.ModelViewSet):
 
-    http_method_names = ['put', 'get']
+    http_method_names = ['get']
     serializer_class = serializers.ReviewSearchSerializer
     filter_backends = (filters.SearchFilter,)
 
-    @csrf_exempt
     def get_queryset(self):
         """
         Review Search Function
 
         #sample key , lat and lon (?key=4&lat=10.0214997527&lng=76.3446975135)
         """
-        search = self.request.GET.get('key')
+        search = self.request.GET.get('key', None)
         latitude = self.request.GET.get('lat', None)
         longitude = self.request.GET.get('lng', None)
+        if None in [search,longitude, latitude]:
+            return []
         return review_models.Review.get_search_results(search, latitude, longitude, self.request.user)
+
+
+
 
 
 class AgreeDisagreeViewSet(mixins.UserRequired, viewsets.ModelViewSet):
