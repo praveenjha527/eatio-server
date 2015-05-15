@@ -2,17 +2,15 @@
 """
 API view for review
 """
-from requests import Response
+
 from rest_framework import viewsets
 from rest_framework import generics
-from rest_framework import status
 
 from applications.review import serializers
 from applications.review import models as review_models
 from common import mixins
 from rest_framework import filters
 
-from django.views.decorators.csrf import csrf_exempt
 
 
 class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
