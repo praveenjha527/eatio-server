@@ -12,7 +12,6 @@ from common import mixins
 from rest_framework import filters
 
 
-
 class ReviewViewSet(mixins.UserRequired, viewsets.ModelViewSet):
     """
     Create a review
@@ -51,9 +50,6 @@ class ReviewSearchViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         if None in [search,longitude, latitude]:
             return []
         return review_models.Review.get_search_results(search, latitude, longitude, self.request.user)
-
-
-
 
 
 class AgreeDisagreeViewSet(mixins.UserRequired, viewsets.ModelViewSet):

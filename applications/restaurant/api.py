@@ -18,6 +18,7 @@ class RestaurantViewSet(mixins.UserRequired, viewsets.ModelViewSet):
     lookup_field = "external_id"
     http_method_names = ["get"]
     serializer_class = serializers.RestaurantSerializer
+    queryset = restaurant_models.Restaurant.objects.all().order_by('-weight')
 
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
@@ -32,11 +33,6 @@ class RestaurantViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
         return serializers.RestaurantDetailSerializer if self.kwargs.get(
             lookup_url_kwarg) else serializers.RestaurantSerializer
-
-    def get_queryset(self):
-        latitude = self.request.GET.get('lat', None)
-        longitude = self.request.GET.get('lng', None)
-        return restaurant_models.Restaurant.objects.all().order_by('-weight')
 
 
 class RestaurantNearbyViewSet(RestaurantViewSet):
