@@ -22,7 +22,10 @@ sudo killall -s INT /home/ubuntu/eatio_env/bin/uwsgi
 
 ##Clear Table
 drop schema public cascade;
+
 create schema public;
+
+then load fixtures via python manage.py loaddata social_fixtures.json
 
 Then apply migrations from the scratch
 
