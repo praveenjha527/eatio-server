@@ -6,7 +6,7 @@ from .weightage import execute_calculation
 import logging
 
 
-class SendEmailTask(PeriodicTask):
+class RunCalculationPeriodically(PeriodicTask):
     """
     A periodic task that send email notification.
     # this will run every 60 seconds
