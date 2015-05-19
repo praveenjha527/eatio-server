@@ -20,6 +20,12 @@ sudo killall -s INT /home/ubuntu/eatio_env/bin/uwsgi
 2. celery worker --app=eatio_web -l info (running celery)
 3. ps aux | grep celery (to see the celery process)
 
+##Clear Table
+drop schema public cascade;
+create schema public;
+
+Then apply migrations from the scratch
+
 http://thomassileo.com/blog/2012/08/20/how-to-keep-celery-running-with-supervisor/
 
 http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html
