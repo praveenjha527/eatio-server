@@ -96,10 +96,10 @@ class FourSquare(object):
         }
         if detail:
             formated_venue['image'] = self._get_image_from_json(venue)
-            formated_venue['lat'] = venue['location']['lat'] if venue.get(
-                'location') and venue['location'].get('lat') else ""
-            formated_venue['lng'] = venue['location']['lng'] if venue.get(
-                'location') and venue['location'].get('lng') else ""
+            formated_venue['lat'] = float(venue['location']['lat']) if venue.get(
+                'location') and venue['location'].get('lat') else 0
+            formated_venue['lng'] = float(venue['location']['lng']) if venue.get(
+                'location') and venue['location'].get('lng') else 0
         return formated_venue
 
     def _get_image_from_json(self, venue):
