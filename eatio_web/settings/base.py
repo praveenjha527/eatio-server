@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'push_notifications',
     'robots',
+    'ckeditor',
 
     # preferences for the app as a whole
     'solo',
@@ -71,6 +72,7 @@ INSTALLED_APPS = (
     'applications.globalprefs',
     'applications.web',
     'acra',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -130,6 +132,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 
 AUTH_USER_MODEL = 'accounts.User'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # template directories
 TEMPLATE_DIRS = (
@@ -224,4 +228,13 @@ PUSH_NOTIFICATIONS_SETTINGS = {
     "GCM_API_KEY": "AIzaSyDoGTXmirHWbBP1nmUD6f0Yv1uADT2VatE",
 }
 
+#CK editor Configuration
 
+
+CKEDITOR_CONFIGS = {
+   'default': {
+       'toolbar': 'full',
+       'height': 300,
+       'width': 600,
+   },
+}

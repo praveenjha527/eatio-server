@@ -40,3 +40,4 @@ texttable==0.8.3
 uWSGI==2.0.10
 wsgiref==0.1.2
 djangocms-admin-style==0.2.5
+django-ckeditor==4.4.8

@@ -1,5 +1,13 @@
 [
   {
+    "model": "sites.Site",
+    "pk": 1,
+    "fields": {
+      "domain": "eatio.co",
+      "name": "Eatio"
+    }
+  },
+  {
       "model": "socialaccount.SocialApp",
       "pk": 1,
       "fields": {
@@ -8,7 +16,8 @@
           "name": "Facebook",
           "key":"",
           "client_id": "1543276082604640",
-          "secret": "ebf8c0d387bab25017dfb8d0ada83f74"
+          "secret": "ebf8c0d387bab25017dfb8d0ada83f74",
+          "sites":[1]
       }
   }
 ]

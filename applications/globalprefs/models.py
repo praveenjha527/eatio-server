@@ -1,6 +1,7 @@
 from django.db import models
 
 from solo.models import SingletonModel
+from ckeditor.fields import RichTextField
 
 
 
@@ -23,6 +24,9 @@ class AppPreferences(SingletonModel):
     number_of_feeds_in_page = models.SmallIntegerField(default=10, help_text='Number of feeds to be sent to phone per one page fetched by ios app in NEWS page')
     number_of_rewards_in_page = models.SmallIntegerField(default=5, help_text='Number of rewards to be sent to phone per one page fetched by ios app in REWARDS page')
     graceful_error_message = models.CharField(max_length=200, default= 'Oh snap, something went wrong')
+    terms_and_conditions = RichTextField(default='Terms and Conditions')
+    privacy_policy = RichTextField(default='Privacy Policy')
+    FAQ = RichTextField(default='Frequently Asked Questions')
 
 
 
