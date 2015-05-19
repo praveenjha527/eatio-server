@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from annoying import functions
 from common import base_models
 from .foursquare import get_restaurant_details_from_foursquare
-
+from django.conf import settings
 
 class LocationManager(models.Manager):
     def nearby(self, lat, lng, proximity):
@@ -22,8 +22,8 @@ class LocationManager(models.Manager):
               """
         gcd_lt = "{} < %s".format(gcd)
         return self.get_queryset()\
-                   .exclude(latitude=None)\
-                   .exclude(longitude=None)\
+                   .exclude(lat=None)\
+                   .exclude(lng=None)\
                    .extra(
                        select={'distance': gcd},
                        select_params=[lat, lng, lat],
@@ -60,3 +60,12 @@ class Restaurant(base_models.TimeStampedModelBase):
             details = get_restaurant_details_from_foursquare(external_id)
             restaurant = cls.objects.create(**details)
         return restaurant
+
+    @classmethod
+    def get_restaurant_results(cls, latitude=None, longitude=None):
+        #sample lat and lon (?lat=10.0214997527&lng=76.3446975135)
+        restaurants = []
+        if latitude and longitude:
+            restaurants = cls.objects.nearby(float(latitude), float(longitude), settings.REVIEWS_FETCH_DISTANCE).order_by('-weight')
+
+        return restaurants

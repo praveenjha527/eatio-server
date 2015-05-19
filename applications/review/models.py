@@ -66,6 +66,7 @@ class Review(base_models.TimeStampedModelBase):
 
     @classmethod
     def get_valid_reviews(cls, restaurant=None, latitude=None, longitude=None, user=None):
+        reviews =[]
         hours_before_time = timezone.now() - timedelta(hours=settings.REVIEWS_HOURS_COUNT)
         if latitude and longitude:
             #sample lat and lon (?lat=10.0214997527&lng=76.3446975135)
@@ -86,6 +87,7 @@ class Review(base_models.TimeStampedModelBase):
 
     @classmethod
     def get_search_results(cls,key, latitude=None, longitude=None, user=None):
+        reviews =[]
         if latitude and longitude:
             reviews = cls.objects.nearby(float(latitude), float(longitude), settings.REVIEWS_FETCH_DISTANCE)
 

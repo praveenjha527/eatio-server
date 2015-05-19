@@ -34,6 +34,11 @@ class RestaurantViewSet(mixins.UserRequired, viewsets.ModelViewSet):
         return serializers.RestaurantDetailSerializer if self.kwargs.get(
             lookup_url_kwarg) else serializers.RestaurantSerializer
 
+    def get_queryset(self):
+        latitude = self.request.GET.get('lat', None)
+        longitude = self.request.GET.get('lng', None)
+        return restaurant_models.Restaurant.get_restaurant_results(latitude, longitude)
+
 
 class RestaurantNearbyViewSet(RestaurantViewSet):
     def list(self, request, *args, **kwargs):
