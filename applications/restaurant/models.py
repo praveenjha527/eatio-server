@@ -13,8 +13,8 @@ class Restaurant(base_models.TimeStampedModelBase):
     address = models.CharField(_("Address"), max_length=255,null=True, blank=True)
     city = models.CharField(_("City"), max_length=255,null=True, blank=True)
     country = models.CharField(_("Country"), max_length=255,null=True, blank=True)
-    lat = models.CharField(_("Latitude"), max_length=30,null=True, blank=True)
-    lng = models.CharField(_("Longitude"), max_length=30,null=True, blank=True)
+    #lat = models.CharField(_("Latitude"), max_length=30,null=True, blank=True)
+    #lng = models.CharField(_("Longitude"), max_length=30,null=True, blank=True)
     distance = models.CharField(_("Distance"), max_length=30,null=True, blank=True)
     weight = models.IntegerField(default=0)
 
