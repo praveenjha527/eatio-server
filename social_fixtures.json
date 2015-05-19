@@ -1,0 +1,14 @@
+[
+  {
+      "model": "socialaccount.SocialApp",
+      "pk": 1,
+      "fields": {
+          "id":1,
+          "provider": "facebook",
+          "name": "Facebook",
+          "key":"",
+          "client_id": "1543276082604640",
+          "secret": "ebf8c0d387bab25017dfb8d0ada83f74"
+      }
+  }
+]
