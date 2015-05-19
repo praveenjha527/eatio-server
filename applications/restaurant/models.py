@@ -6,6 +6,32 @@ from common import base_models
 from .foursquare import get_restaurant_details_from_foursquare
 
 
+class LocationManager(models.Manager):
+    def nearby(self, lat, lng, proximity):
+        """
+        Return all object which distance to specified coordinates
+        is less than proximity given in kilometers
+        """
+        # Great circle distance formula
+        gcd = """
+              6371 * acos(
+               cos(radians(%s)) * cos(radians(lat))
+               * cos(radians(lng) - radians(%s)) +
+               sin(radians(%s)) * sin(radians(lat))
+              )
+              """
+        gcd_lt = "{} < %s".format(gcd)
+        return self.get_queryset()\
+                   .exclude(latitude=None)\
+                   .exclude(longitude=None)\
+                   .extra(
+                       select={'distance': gcd},
+                       select_params=[lat, lng, lat],
+                       where=[gcd_lt],
+                       params=[lat, lng, lat, proximity],
+                       order_by=['distance']
+                   )
+
 class Restaurant(base_models.TimeStampedModelBase):
     external_id = models.CharField(_("Restaurant external Id"), max_length=100, db_index=True)
     name = models.CharField(_("Name"), max_length=255)
@@ -17,6 +43,7 @@ class Restaurant(base_models.TimeStampedModelBase):
     lng = models.FloatField(default=0)
     distance = models.CharField(_("Distance"), max_length=30,null=True, blank=True)
     weight = models.IntegerField(default=0)
+    objects = LocationManager()
 
     def __unicode__(self):
         return "%s" % (self.name)
