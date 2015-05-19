@@ -8,9 +8,8 @@ import logging
 
 class RunCalculationPeriodically(PeriodicTask):
     """
-    A periodic task that send email notification.
-    # this will run every 60 seconds
-    # send all emails in the mailer queue
+    A periodic task that calculate weightage of restaurants.
+    # this will run every 35 seconds
     """
     run_every = timedelta(minutes=35)
 
