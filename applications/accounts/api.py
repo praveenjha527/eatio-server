@@ -99,6 +99,7 @@ class PasswordResetRequestEmail(generics.GenericAPIView):
     def permission_denied(self, request):
         raise exceptions.PermissionDenied("You can't reset your password if you are already authenticated")
 
+
 class HelpTicketView(mixins.UserRequired,generics.CreateAPIView):
     """
     View for creating a help ticket
@@ -107,6 +108,14 @@ class HelpTicketView(mixins.UserRequired,generics.CreateAPIView):
     model = HelpTicket
     serializer_class = HelpTicketSerializer
 
+    def perform_create(self, serializer):
+        # Include the owner attribute directly, rather than from request data.
+
+        instance = serializer.save(user=self.request.user)
+        from django.conf import settings
+        from django.core.mail import send_mail
+
+        send_mail('Help ticket raised', '', settings.DEFAULT_FROM_EMAIL, ['renjithraj2005@gmail.com'])
     def pre_save(self, obj):
         """
         Set the ticket's owner, based on the incoming request.
