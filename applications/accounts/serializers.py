@@ -66,7 +66,7 @@ class UserRegisterSerializer(UserSerializer):
 
     class Meta:
         model = account_models.User
-        fields = ('id', 'username', 'name', 'password', 'image', 'gender', 'token')
+        fields = ('id', 'username', 'name', 'password', 'image', 'gender', 'token','country')
         read_only_fields = ('id', )
         write_only_fields = ('password', )
 

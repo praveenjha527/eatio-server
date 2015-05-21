@@ -19,6 +19,7 @@ from common.mixins import UserRequired
 from applications.accounts import serializers
 from notifications.models import create_bonus_point_received_notification
 
+
 class UserRegisterViewSet(viewsets.ModelViewSet):
     """
     View set for registration.
