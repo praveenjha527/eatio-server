@@ -74,7 +74,7 @@ class ReviewBaseSerializer(BaseReviewBaseSerializer):
         return accounts_serializer.UserSerializer(instance=obj.user, context=self.context).data
 
 
-class ReviewSerializer(ReviewBaseSerializer):
+class ReviewSerializerForUser(ReviewBaseSerializer):
     """
     Serializer for review.Review with restaurant
     """
@@ -84,7 +84,24 @@ class ReviewSerializer(ReviewBaseSerializer):
         model = review_models.Review
         fields = (
             'id', 'review', 'good', 'external_id', 'agree_count',
-            'disagree_count', 'voted', 'time_since', 'restaurant', "user", "image")
+            'disagree_count', 'voted', 'time_since', 'image','restaurant')
+        read_only_fields = ('id', )
+
+    def get_restaurant(self, obj):
+        return restaurant_serializer.RestaurantSerializer(instance=obj.restaurant, context=self.context).data
+
+
+class ReviewSerializer(BaseReviewBaseSerializer):
+    """
+    Serializer for review.Review with restaurant
+    """
+    restaurant = serializers.SerializerMethodField()
+
+    class Meta:
+        model = review_models.Review
+        fields = (
+            'id', 'review', 'good', 'external_id', 'agree_count',
+            'disagree_count', 'voted', 'time_since', 'restaurant', "restaurant", "image")
         read_only_fields = ('id', )
 
     def get_restaurant(self, obj):

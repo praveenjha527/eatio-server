@@ -52,7 +52,7 @@ class UserSerializerWithReview(UserSerializer):
 
     def get_reviews(self, obj):
         from applications.review import serializers as review_serializers
-        return [review_serializers.BaseReviewBaseSerializer(
+        return [review_serializers.ReviewSerializerForUser(
             instance=review, context=self.context,
             ).data for review in review_models.Review.get_user_reviews(obj)]
 
