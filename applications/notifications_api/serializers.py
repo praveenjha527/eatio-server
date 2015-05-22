@@ -25,10 +25,12 @@ class NotificationSerializer(serializers.ModelSerializer):
         :param notification:  notification instance
         :return: image
         """
-        image = notification.target.image
-        if image:
-            return self.context['request'].build_absolute_uri(image.medium.url)
-        return None
+        try:
+            image = notification.target.image
+            if image:
+                return self.context['request'].build_absolute_uri(image.medium.url)
+        except Exception:
+            return None
 
     def _get_actor_image_url(self, notification):
         """
@@ -36,7 +38,9 @@ class NotificationSerializer(serializers.ModelSerializer):
         :param notification:
         :return: actor image
         """
-        actor_image = notification.actor.image
-        if actor_image:
-            return self.context['request'].build_absolute_uri(actor_image.medium.url)
-        return None
+        try:
+            actor_image = notification.actor.image
+            if actor_image:
+                return self.context['request'].build_absolute_uri(actor_image.medium.url)
+        except Exception:
+            return None
