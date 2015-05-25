@@ -82,9 +82,7 @@ class ReviewSerializerForUser(ReviewBaseSerializer):
 
     class Meta:
         model = review_models.Review
-        fields = (
-            'id', 'review', 'good', 'external_id', 'agree_count',
-            'disagree_count', 'voted', 'time_since', 'image','restaurant')
+        fields = ReviewBaseSerializer.Meta.fields+ ('restaurant', )
         read_only_fields = ('id', )
 
     def get_restaurant(self, obj):
