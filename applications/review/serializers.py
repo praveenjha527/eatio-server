@@ -3,7 +3,6 @@
 API serializer classes for profile
 """
 from django.utils.translation import ugettext_lazy as _
-from django.utils.timesince import timesince
 
 from rest_framework import serializers
 
@@ -11,6 +10,7 @@ from applications.review import models as review_models
 from applications.restaurant import models as restaurant_models
 from applications.accounts import serializers as accounts_serializer
 from applications.restaurant import serializers as restaurant_serializer
+from .time_utils import timesince
 
 
 class BaseReviewBaseSerializer(serializers.ModelSerializer):
