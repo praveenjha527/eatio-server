@@ -238,3 +238,5 @@ CKEDITOR_CONFIGS = {
        'width': 600,
    },
 }
+
+ACCOUNT_ADAPTER = 'applications.utils.adapters.MessageFreeAdapter'
