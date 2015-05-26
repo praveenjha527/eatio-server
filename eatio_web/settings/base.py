@@ -240,3 +240,5 @@ CKEDITOR_CONFIGS = {
 }
 
 ACCOUNT_ADAPTER = 'applications.utils.adapters.MessageFreeAdapter'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
