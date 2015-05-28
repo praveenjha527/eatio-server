@@ -37,17 +37,19 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
     def get_agree(self, obj):
         reviews = review_models.Review.objects.filter(restaurant=obj)
+        agree_count = 0
         for review in reviews:
             # review total agree_count and disagree_count
             agree_count = AgreeDisagree.objects.filter(review=review, agree=True).count()
-            return agree_count
+        return agree_count
 
     def get_disagree(self, obj):
         reviews = review_models.Review.objects.filter(restaurant=obj)
+        disagree_count =0
         for review in reviews:
             # review total agree_count and disagree_count
             disagree_count = AgreeDisagree.objects.filter(review=review, agree=False).count()
-            return disagree_count
+        return disagree_count
 
     def get_latestImg(self, obj):
         current_site = Site.objects.get_current()
