@@ -83,6 +83,21 @@ class SocialLoginBase(SocialLogin):
         self.user = self.serializer.validated_data['user']
         self.token, self.created = self.token_model.objects.get_or_create(
             user=self.user)
+
+        from models import send_signup_email
+        from eatio_web.settings import base as settings
+        try:
+            if self.created:
+                send_signup_email(self.user)
+        except Exception:
+            pass
+        #TODO Integration with mixpanel
+
+        if self.created:
+            obj, created = SignupCode.objects.get_or_create(user=self.user, code = create_referral_code(self.user.username))
+
+        if settings.GENERATE_SIGNUP_BONUS_AND_NOTIFY and self.created:
+            create_bonus_point_received_notification(get_admin(),self.user)
         if getattr(settings, 'REST_SESSION_LOGIN', True):
             login(self.request, self.user)
 
