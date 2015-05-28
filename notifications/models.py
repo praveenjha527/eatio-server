@@ -203,7 +203,7 @@ class Notification(models.Model):
         if android_device_list:
             for device in android_device_list:
                 if device.registration_id:
-                    device.send_message(self.description)
+                    device.send_message(self.verb)
                     print "success"
                 self.mark_as_pushed()
 
