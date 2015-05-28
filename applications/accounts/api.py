@@ -9,6 +9,10 @@ from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework import exceptions
 from rest_framework.response import Response
+from rest_framework import status
+
+from django.contrib.auth import login
+from django.conf import settings
 
 from applications.accounts import models as account_models
 from applications.accounts.models import PasswordReset, HelpTicket, SignupCode
@@ -73,9 +77,22 @@ class ProfileEditViewSet(UserRequired, viewsets.ModelViewSet):
         return super(ProfileEditViewSet, self).get_queryset()
 
 
-class FacebookLogin(SocialLogin):
-    adapter_class = FacebookOAuth2Adapter
+class SocialLoginBase(SocialLogin):
 
+    def login(self):
+        self.user = self.serializer.validated_data['user']
+        self.token, self.created = self.token_model.objects.get_or_create(
+            user=self.user)
+        if getattr(settings, 'REST_SESSION_LOGIN', True):
+            login(self.request, self.user)
+
+    def get_response(self):
+        print self
+        return Response({'token': self.token.key, 'already_connected': not self.created, }, status=status.HTTP_200_OK)
+
+
+class FacebookLogin(SocialLoginBase):
+    adapter_class = FacebookOAuth2Adapter
 
 
 class PasswordResetRequestEmail(generics.GenericAPIView):
