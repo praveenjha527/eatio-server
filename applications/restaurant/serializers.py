@@ -7,9 +7,8 @@ from django.conf import settings
 from rest_framework import serializers
 from applications.review import models as review_models
 from applications.restaurant import models as restaurant_models
-from applications.review.models import Review, AgreeDisagree
+from applications.review.models import AgreeDisagree
 from geopy.distance import vincenty
-from django.contrib.sites.models import Site
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
@@ -52,10 +51,9 @@ class RestaurantSerializer(serializers.ModelSerializer):
         return disagree_count
 
     def get_latestImg(self, obj):
-        current_site = Site.objects.get_current()
         try:
             review = review_models.Review.objects.filter(restaurant=obj).exclude(image='').latest('created')
-            return current_site.domain+review.image.url
+            return self.context['request'].build_absolute_uri(review.image.url)
         except Exception:
             return settings.RESTAURANT_DEFAULT_IMAGE
 
