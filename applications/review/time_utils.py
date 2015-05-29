@@ -23,7 +23,7 @@ def timesince(d, now=None, reversed=False):
     """
     chunks = (
         (60 * 60 * 24, ungettext_lazy('%dd', '%dd')),
-        (60 * 60, ungettext_lazy('%dh', '%d h')),
+        (60 * 60, ungettext_lazy('%dh', '%dh')),
         (60, ungettext_lazy('%dm', '%dm'))
     )
     # Convert datetime.date to datetime.datetime for comparison.

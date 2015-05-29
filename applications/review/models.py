@@ -61,6 +61,9 @@ class Review(base_models.TimeStampedModelBase):
 
     objects = LocationManager()
 
+    class Meta:
+        ordering = ['-created']
+
     def __unicode__(self):
         return "%s-%s" % (self.restaurant, self.user)
 
@@ -82,7 +85,7 @@ class Review(base_models.TimeStampedModelBase):
 
     @classmethod
     def get_user_reviews(cls, user):
-        reviews = cls.objects.filter(user=user)
+        reviews = cls.objects.filter(user=user)[:2]
         return reviews
 
     @classmethod
