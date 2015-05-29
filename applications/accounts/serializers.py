@@ -13,7 +13,7 @@ from rest_framework.authtoken.models import Token
 from applications.accounts import models as account_models
 from applications.review import models as review_models
 from .models import HelpTicket
-
+from .fields import COUNTRIES
 
 class UserSerializer(serializers.ModelSerializer):
     """
@@ -32,6 +32,13 @@ class UserSerializer(serializers.ModelSerializer):
         except Exception:
             return "admin"
 
+    def get_country(self, obj):
+        country_dict = dict((y, x) for x, y in COUNTRIES)
+        try:
+            return country_dict[obj.country]
+        except Exception:
+            return ""
+        
     def get_image(self, obj):
         """
         return selfie count
