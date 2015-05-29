@@ -15,15 +15,17 @@ from applications.review import models as review_models
 from .models import HelpTicket
 from .fields import COUNTRIES
 
+
 class UserSerializer(serializers.ModelSerializer):
     """
     Serializer for auth.User
     """
     code = serializers.SerializerMethodField()
+    countryiso = serializers.SerializerMethodField()
 
     class Meta:
         model = account_models.User
-        fields = ('id', 'username', 'name', 'image', 'gender', 'code', 'activity_level', 'total_points', 'redeemable_points', 'country', 'age', 'location_city')
+        fields = ('id', 'username', 'name', 'image', 'gender', 'code', 'activity_level', 'total_points', 'redeemable_points', 'country', 'age', 'location_city' ,'countryiso')
         read_only_fields = ('id', 'total_points', 'redeemable_points' )
 
     def get_code(self, obj):
@@ -32,13 +34,6 @@ class UserSerializer(serializers.ModelSerializer):
         except Exception:
             return "admin"
 
-    def get_country(self, obj):
-        country_dict = dict((y, x) for x, y in COUNTRIES)
-        try:
-            return country_dict[obj.country]
-        except Exception:
-            return ""
-        
     def get_image(self, obj):
         """
         return selfie count
@@ -46,6 +41,14 @@ class UserSerializer(serializers.ModelSerializer):
         :return: count
         """
         return self.context['request'].build_absolute_uri(obj.image.small.url)
+
+
+    def get_countryiso(self, obj):
+        country_dict = dict((y, x) for y, x in COUNTRIES)
+        try:
+            return country_dict[obj.country]
+        except Exception:
+            return ""
 
 
 class UserSerializerWithReview(UserSerializer):
