@@ -69,7 +69,7 @@ class Review(base_models.TimeStampedModelBase):
 
     def admin_thumbnail(self):
         if self.image:
-            return u'<img src="%s" height = "40" width= "40"/>' % (self.medium.url)
+            return u'<img src="%s" height = "40" width= "40"/>' % (self.image.medium.url)
         else:
             return None
     admin_thumbnail.allow_tags=True
