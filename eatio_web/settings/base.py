@@ -243,3 +243,10 @@ ACCOUNT_ADAPTER = 'applications.utils.adapters.MessageFreeAdapter'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'METHOD': 'oauth2'  # instead of 'oauth2'
+    }
+}

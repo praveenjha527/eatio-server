@@ -2,6 +2,8 @@
 """
 API view for profile
 """
+from allauth.socialaccount.models import SocialAccount
+from django.core.files.base import ContentFile
 from django.http import Http404
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLogin
@@ -10,6 +12,7 @@ from rest_framework import generics
 from rest_framework import exceptions
 from rest_framework.response import Response
 from rest_framework import status
+from requests import request
 
 from django.contrib.auth import login
 from django.conf import settings
@@ -84,6 +87,21 @@ class SocialLoginBase(SocialLogin):
         self.token, self.created = self.token_model.objects.get_or_create(
             user=self.user)
 
+        if self.created:
+            try:
+                social_obj = SocialAccount.objects.get(user=self.user)
+                self.user.name = social_obj.extra_data[u'name']
+                self.user.gender = social_obj.extra_data[u'gender']
+                if u'email' in social_obj.extra_data:
+                    self.user.email = social_obj.extra_data[u'email']
+                self.user.save()
+                url = 'http://graph.facebook.com/{0}/picture?type=large'.format(social_obj.extra_data[u'id'])
+                response = request('GET', url, params={'type': 'large'})
+                response.raise_for_status()
+                self.user.image.save('{0}_social.jpg'.format(social_obj.extra_data[u'name']),
+                                   ContentFile(response.content))
+            except Exception:
+                pass
         from models import send_signup_email
         from eatio_web.settings import base as settings
         try:
@@ -102,7 +120,6 @@ class SocialLoginBase(SocialLogin):
             login(self.request, self.user)
 
     def get_response(self):
-        print self
         return Response({'token': self.token.key, 'already_connected': not self.created, }, status=status.HTTP_200_OK)
 
 

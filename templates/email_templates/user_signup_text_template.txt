@@ -1,8 +1,8 @@
-Hello {{ new_user.first_name }} {{ new_user.last_name }},
+Hello {{ new_user.first_name }},
 
 Thanks for signing up
 
 Best wishes
 
-Eatio Team
+Team Eatio
 
