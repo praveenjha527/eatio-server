@@ -87,7 +87,7 @@ def send_signup_email(new_user):
     html_template = get_template('email_templates/user_signup_html_template.html')
     text_template = get_template('email_templates/user_signup_text_template.txt')
 
-    subject =  u'Welcome to Eatio, %s' % new_user.first_name
+    subject =  u'Welcome to Eatio'
 
     context = Context({'user': new_user})
     text_content = text_template.render(context)
