@@ -13,11 +13,16 @@ def execute_calculation():
             agree_count = AgreeDisagree.objects.filter(review=review, agree=True).count()
             disagree_count = AgreeDisagree.objects.filter(review=review, agree=False).count()
 
-            if review.good:
-              weight = weight+agree_count-disagree_count+1
+            if agree_count != 0 and disagree_count != 0:
 
-            if not review.good:
-              weight = weight-agree_count+disagree_count-1
+                difference = agree_count - disagree_count
+                if review.good:
+                    if difference >= 0:
+                        weight += 1
+
+                if not review.good:
+                    if difference <= 0:
+                        weight += 1
 
         # saves restaurant total weight
         restaurant.weight = weight
