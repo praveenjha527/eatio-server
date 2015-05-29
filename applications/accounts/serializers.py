@@ -56,6 +56,7 @@ class UserSerializerWithReview(UserSerializer):
             instance=review, context=self.context,
             ).data for review in review_models.Review.get_user_reviews(obj)]
 
+
 class UserRegisterSerializer(UserSerializer):
     """
     User register serializer returns token
