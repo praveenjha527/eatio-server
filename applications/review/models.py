@@ -67,6 +67,13 @@ class Review(base_models.TimeStampedModelBase):
     def __unicode__(self):
         return "%s-%s" % (self.restaurant, self.user)
 
+    def admin_thumbnail(self):
+        if self.image:
+            return u'<img src="%s" height = "40" width= "40"/>' % (self.medium.url)
+        else:
+            return None
+    admin_thumbnail.allow_tags=True
+
     @classmethod
     def get_valid_reviews(cls, restaurant=None, latitude=None, longitude=None, user=None):
         reviews =[]
