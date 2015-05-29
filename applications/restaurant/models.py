@@ -48,6 +48,13 @@ class Restaurant(base_models.TimeStampedModelBase):
     def __unicode__(self):
         return "%s" % (self.name)
 
+    def admin_thumbnail(self):
+        if self.image:
+            return u'<img src="%s" height = "40" width= "40"/>' % (self.image)
+        else:
+            return None
+    admin_thumbnail.allow_tags=True
+
     @classmethod
     def get_or_create_restaurant(cls, external_id):
         """
